@@ -6,6 +6,9 @@ But, i don find multi sections with UICollectionView.
 
 So that I will try it.
 
+this repository is inspired by https://github.com/rechsteiner/Parchment.
+I made it based on that repository.
+
 ## 20180513
 
 I just created single section menu.
