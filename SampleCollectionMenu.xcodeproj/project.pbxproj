@@ -14,6 +14,13 @@
 		F392C69420A7B9D20006D463 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F392C69220A7B9D20006D463 /* LaunchScreen.storyboard */; };
 		F392C69F20A7B9D20006D463 /* SampleCollectionMenuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C69E20A7B9D20006D463 /* SampleCollectionMenuTests.swift */; };
 		F392C6AA20A7B9D20006D463 /* SampleCollectionMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6A920A7B9D20006D463 /* SampleCollectionMenuUITests.swift */; };
+		F392C6B820A7BF300006D463 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F392C6B720A7BF300006D463 /* ViewController.xib */; };
+		F392C6BA20A7C1E20006D463 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6B920A7C1E20006D463 /* DateCell.swift */; };
+		F392C6BC20A7E6580006D463 /* MenuDataSouceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6BB20A7E6580006D463 /* MenuDataSouceDelegate.swift */; };
+		F392C6BE20A827010006D463 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F392C6BD20A827010006D463 /* DateCell.xib */; };
+		F392C6C020A82B450006D463 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6BF20A82B450006D463 /* DateExtension.swift */; };
+		F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C120A82BA10006D463 /* DateFormatters.swift */; };
+		F392C6C420A82C720006D463 /* WorkDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C320A82C720006D463 /* WorkDay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +54,13 @@
 		F392C6A520A7B9D20006D463 /* SampleCollectionMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleCollectionMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F392C6A920A7B9D20006D463 /* SampleCollectionMenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCollectionMenuUITests.swift; sourceTree = "<group>"; };
 		F392C6AB20A7B9D20006D463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F392C6B720A7BF300006D463 /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		F392C6B920A7C1E20006D463 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		F392C6BB20A7E6580006D463 /* MenuDataSouceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDataSouceDelegate.swift; sourceTree = "<group>"; };
+		F392C6BD20A827010006D463 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
+		F392C6BF20A82B450006D463 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		F392C6C120A82BA10006D463 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
+		F392C6C320A82C720006D463 /* WorkDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +117,13 @@
 				F392C69020A7B9D20006D463 /* Assets.xcassets */,
 				F392C69220A7B9D20006D463 /* LaunchScreen.storyboard */,
 				F392C69520A7B9D20006D463 /* Info.plist */,
+				F392C6B720A7BF300006D463 /* ViewController.xib */,
+				F392C6B920A7C1E20006D463 /* DateCell.swift */,
+				F392C6BB20A7E6580006D463 /* MenuDataSouceDelegate.swift */,
+				F392C6BD20A827010006D463 /* DateCell.xib */,
+				F392C6BF20A82B450006D463 /* DateExtension.swift */,
+				F392C6C120A82BA10006D463 /* DateFormatters.swift */,
+				F392C6C320A82C720006D463 /* WorkDay.swift */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -231,7 +252,9 @@
 			files = (
 				F392C69420A7B9D20006D463 /* LaunchScreen.storyboard in Resources */,
 				F392C69120A7B9D20006D463 /* Assets.xcassets in Resources */,
+				F392C6B820A7BF300006D463 /* ViewController.xib in Resources */,
 				F392C68F20A7B9D10006D463 /* Main.storyboard in Resources */,
+				F392C6BE20A827010006D463 /* DateCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +279,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
+				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,
+				F392C6C420A82C720006D463 /* WorkDay.swift in Sources */,
+				F392C6BA20A7C1E20006D463 /* DateCell.swift in Sources */,
 				F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */,
+				F392C6BC20A7E6580006D463 /* MenuDataSouceDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
