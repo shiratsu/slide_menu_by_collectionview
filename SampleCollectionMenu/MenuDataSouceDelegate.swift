@@ -19,8 +19,6 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         // メニューデータを作成する
         objMenu.initMenu(90, fromDate: objDay.nowDate)
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
