@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         layout.headerReferenceSize = CGSize(width:50,height:55)
         
         layout.scrollDirection = .horizontal
+        layout.sectionHeadersPinToVisibleBounds = true
         
         let nib  = UINib(nibName: "DateCell", bundle:nil)
         let sectionnib  = UINib(nibName: "DateSectionHeader", bundle:nil)
