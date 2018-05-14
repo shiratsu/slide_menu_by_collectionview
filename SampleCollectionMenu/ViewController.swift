@@ -44,12 +44,14 @@ class ViewController: UIViewController {
         layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
         
         // セクション毎のヘッダーサイズ.
-        //layout.headerReferenceSize = CGSize(width:100,height:30)
+        layout.headerReferenceSize = CGSize(width:50,height:55)
         
         layout.scrollDirection = .horizontal
         
         let nib  = UINib(nibName: "DateCell", bundle:nil)
+        let sectionnib  = UINib(nibName: "DateSectionHeader", bundle:nil)
         menuview.register(nib, forCellWithReuseIdentifier: "DateCell")
+        menuview.register(sectionnib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "DateSectionHeader")
         
         menuview.collectionViewLayout = layout
         

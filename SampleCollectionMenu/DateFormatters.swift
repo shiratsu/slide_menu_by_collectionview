@@ -34,6 +34,12 @@ struct DateFormatters {
         dateFormatter.dateFormat = "MM/dd"
         return dateFormatter
     }()
+
+    static var monthFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM"
+        return dateFormatter
+    }()
     
     static var weekdayFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()

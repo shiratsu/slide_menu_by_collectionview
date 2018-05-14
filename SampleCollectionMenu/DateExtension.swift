@@ -33,3 +33,59 @@ extension Date {
     }
     
 }
+
+extension Date {
+    
+    
+    /// 日付の差分
+    ///
+    /// - Parameter targetDate: <#targetDate description#>
+    /// - Returns: <#return value description#>
+    func daysDiff(_ targetDate: Date) -> Int {
+        
+        return calendar.dateComponents([.day], from: self, to: targetDate).day ?? 0
+    }
+    
+    
+    /// 月の差分
+    ///
+    /// - Parameter targetDate: <#targetDate description#>
+    /// - Returns: <#return value description#>
+    func monthsDiff(_ targetDate: Date) -> Int {
+        return calendar.dateComponents([.month], from: self, to: targetDate).month ?? 0
+    }
+    
+    
+    /// 月初
+    ///
+    /// - Returns: <#return value description#>
+    func startOfMonth() -> Date {
+        return calendar.date(from: calendar.dateComponents([.year, .month], from: calendar.startOfDay(for: self)))!
+    }
+    
+    
+    /// 月末
+    var endOfMonth: Date {
+        return calendar.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
+    
+    /// 指定差分日付を取得
+    ///
+    /// - Parameters:
+    ///   - doubleDiff: <#doubleDiff description#>
+    /// - Returns: <#return value description#>
+    func getDateFromDiff(_ doubleDiff: Double) -> Date{
+        
+        let tmpDate: Date = Date(timeInterval: 86400*doubleDiff, since: self)
+        return tmpDate
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter intDiff: <#intDiff description#>
+    /// - Returns: <#return value description#>
+    func getMonthFromDiff(_ intDiff: Int) -> Date?{
+        let targetMonth = calendar.date(byAdding: .month, value: intDiff, to: self)
+        return targetMonth
+    }
+}

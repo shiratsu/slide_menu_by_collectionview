@@ -11,18 +11,24 @@ import UIKit
 class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
     
     var objDay: WorkDay = WorkDay()
+    var objMenu: DateMenu = DateMenu()
     
     func initWorkDay(){
         // 現在日時と最終日を初期化する
         objDay.initCurrentDate()
+        
+        // メニューデータを作成する
+        objMenu.initMenu(90, fromDate: objDay.nowDate)
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 90
+        return objMenu.aryRows[section]
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int{
-        return 1
+        return objMenu.arySection.count
     }
     
     /**
@@ -35,11 +41,15 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell:DateCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DateCell", for: indexPath) as! DateCell
-        let specificDate: Date = objDay.getDateFromDiff(Double(indexPath.row), date: objDay.nowDate)
-        let date: String = DateFormatters.monthDateFormatter.string(from: specificDate)
-        let weeklane: String = specificDate.weekName
+        
+        // 最初の日時を取得
+        let startDate: Date = objMenu.aryStartDate[indexPath.section]
+        let targetDate: Date = startDate.getDateFromDiff(Double(indexPath.row))
+        
+        let date: String = DateFormatters.monthDateFormatter.string(from: targetDate)
+        let weekname: String = targetDate.weekName
         cell.dateLabel.text = date
-        cell.weekLabel.text = weeklane
+        cell.weekLabel.text = weekname
         return cell
     }
     
@@ -68,5 +78,27 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         if let cell = collectionView.cellForItem(at: indexPath){
             cell.backgroundColor = UIColor(named: "red")
         }
+    }
+    
+    
+    /// sectionのヘッダ
+    ///
+    /// - Parameters:
+    ///   - collectionView: <#collectionView description#>
+    ///   - kind: <#kind description#>
+    ///   - indexPath: <#indexPath description#>
+    /// - Returns: <#return value description#>
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+        
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "DateSectionHeader", for: indexPath) as? DateSectionHeader else {
+            fatalError("Could not find proper header")
+        }
+        
+        if kind == UICollectionElementKindSectionHeader {
+            header.sectionLabel.text = objMenu.arySection[indexPath.section]+"月"
+            return header
+        }
+        
+        return UICollectionReusableView()
     }
 }
