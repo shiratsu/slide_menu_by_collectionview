@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="G1Q-BW-LUq" customClass="DateSectionHeader" customModule="SampleCollectionMenu" customModuleProvider="target">
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="G1Q-BW-LUq" customClass="SectionHeader" customModule="SampleCollectionMenu" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="50" height="55"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -30,7 +30,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="hUD-JT-MK0"/>
             <connections>
-                <outlet property="sectionLabel" destination="Tmr-jJ-W3O" id="HVz-c4-dOV"/>
+                <outlet property="sectionLabel" destination="Tmr-jJ-W3O" id="O34-9d-1JL"/>
             </connections>
             <point key="canvasLocation" x="-38" y="-263.5"/>
         </collectionReusableView>

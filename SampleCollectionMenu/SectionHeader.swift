@@ -1,5 +1,5 @@
 //
-//  DateSectionHeader.swift
+//  SectionHeader.swift
 //  SampleCollectionMenu
 //
 //  Created by 平塚 俊輔 on 2018/05/14.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-final class DateSectionHeader: UICollectionReusableView {
+class SectionHeader: UICollectionReusableView {
     @IBOutlet weak var sectionLabel: UILabel!
 }

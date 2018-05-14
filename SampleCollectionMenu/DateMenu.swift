@@ -8,7 +8,11 @@
 
 import Foundation
 
-class DateMenu: NSObject{
+protocol CollectionMenu: class{
+    
+}
+
+class DateMenu: CollectionMenu{
     
     
     /// <#Description#>

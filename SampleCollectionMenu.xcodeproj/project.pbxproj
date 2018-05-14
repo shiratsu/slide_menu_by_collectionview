@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0CE20A90BAE00A19912 /* DateMenu.swift */; };
-		56CFA0D120A95A4600A19912 /* DateSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* DateSectionHeader.swift */; };
-		56CFA0D320A95AD500A19912 /* DateSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* DateSectionHeader.xib */; };
+		56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* SectionHeader.swift */; };
+		56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* SectionHeader.xib */; };
 		F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C68920A7B9D00006D463 /* AppDelegate.swift */; };
 		F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C68B20A7B9D00006D463 /* ViewController.swift */; };
 		F392C68F20A7B9D10006D463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F392C68D20A7B9D10006D463 /* Main.storyboard */; };
@@ -24,6 +24,7 @@
 		F392C6C020A82B450006D463 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6BF20A82B450006D463 /* DateExtension.swift */; };
 		F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C120A82BA10006D463 /* DateFormatters.swift */; };
 		F392C6C420A82C720006D463 /* WorkDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C320A82C720006D463 /* WorkDay.swift */; };
+		F392C6C620A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +46,8 @@
 
 /* Begin PBXFileReference section */
 		56CFA0CE20A90BAE00A19912 /* DateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMenu.swift; sourceTree = "<group>"; };
-		56CFA0D020A95A4600A19912 /* DateSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSectionHeader.swift; sourceTree = "<group>"; };
-		56CFA0D220A95AD500A19912 /* DateSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateSectionHeader.xib; sourceTree = "<group>"; };
+		56CFA0D020A95A4600A19912 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		56CFA0D220A95AD500A19912 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
 		F392C68620A7B9D00006D463 /* SampleCollectionMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCollectionMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F392C68920A7B9D00006D463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F392C68B20A7B9D00006D463 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		F392C6BF20A82B450006D463 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		F392C6C120A82BA10006D463 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		F392C6C320A82C720006D463 /* WorkDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDay.swift; sourceTree = "<group>"; };
+		F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuUICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +133,9 @@
 				F392C6C120A82BA10006D463 /* DateFormatters.swift */,
 				F392C6C320A82C720006D463 /* WorkDay.swift */,
 				56CFA0CE20A90BAE00A19912 /* DateMenu.swift */,
-				56CFA0D020A95A4600A19912 /* DateSectionHeader.swift */,
-				56CFA0D220A95AD500A19912 /* DateSectionHeader.xib */,
+				56CFA0D020A95A4600A19912 /* SectionHeader.swift */,
+				56CFA0D220A95AD500A19912 /* SectionHeader.xib */,
+				F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -261,7 +264,7 @@
 			files = (
 				F392C69420A7B9D20006D463 /* LaunchScreen.storyboard in Resources */,
 				F392C69120A7B9D20006D463 /* Assets.xcassets in Resources */,
-				56CFA0D320A95AD500A19912 /* DateSectionHeader.xib in Resources */,
+				56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */,
 				F392C6B820A7BF300006D463 /* ViewController.xib in Resources */,
 				F392C68F20A7B9D10006D463 /* Main.storyboard in Resources */,
 				F392C6BE20A827010006D463 /* DateCell.xib in Resources */,
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F392C6C620A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift in Sources */,
 				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
 				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,
@@ -297,7 +301,7 @@
 				F392C6BA20A7C1E20006D463 /* DateCell.swift in Sources */,
 				F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */,
 				F392C6BC20A7E6580006D463 /* MenuDataSouceDelegate.swift in Sources */,
-				56CFA0D120A95A4600A19912 /* DateSectionHeader.swift in Sources */,
+				56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

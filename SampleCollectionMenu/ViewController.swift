@@ -14,6 +14,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuview: UICollectionView!
     @IBOutlet weak var dataview: UIScrollView!
     
+    fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset  = UIEdgeInsetsMake(16, 16, 32, 16)
+        layout.minimumLineSpacing = 15
+        // セクション毎のヘッダーサイズ.
+        layout.headerReferenceSize = CGSize(width:50,height:55)
+        
+        layout.scrollDirection = .horizontal
+        layout.sectionHeadersPinToVisibleBounds = true
+        // Cell一つ一つの大きさ.
+        layout.itemSize = CGSize(width:50, height:55)
+        
+        return layout
+    }()
+    
     var objDatasourceDelegate: MenuDataSouceDelegate = MenuDataSouceDelegate()
     
     /**
@@ -34,34 +49,19 @@ class ViewController: UIViewController {
     
     fileprivate func _initCollectionView(){
         
-        // CollectionViewのレイアウトを生成.
-        let layout = UICollectionViewFlowLayout()
-        
-        // Cell一つ一つの大きさ.
-        layout.itemSize = CGSize(width:50, height:55)
-        
-        // Cellのマージン.
-        layout.sectionInset = UIEdgeInsetsMake(16, 16, 32, 16)
-        
-        // セクション毎のヘッダーサイズ.
-        layout.headerReferenceSize = CGSize(width:50,height:55)
-        
-        layout.scrollDirection = .horizontal
-        layout.sectionHeadersPinToVisibleBounds = true
-        
         let nib  = UINib(nibName: "DateCell", bundle:nil)
-        let sectionnib  = UINib(nibName: "DateSectionHeader", bundle:nil)
+        let sectionnib  = UINib(nibName: "SectionHeader", bundle:nil)
         menuview.register(nib, forCellWithReuseIdentifier: "DateCell")
-        menuview.register(sectionnib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "DateSectionHeader")
+        menuview.register(sectionnib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeader")
         
-        menuview.collectionViewLayout = layout
+        menuview.collectionViewLayout = collectionViewLayout
         
         menuview.backgroundColor = UIColor.clear
         
         menuview.dataSource = objDatasourceDelegate
         menuview.delegate = objDatasourceDelegate
         
-        objDatasourceDelegate.initWorkDay()
+        objDatasourceDelegate.initMenu()
         
         menuview.reloadData()
 

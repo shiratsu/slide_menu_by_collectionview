@@ -13,7 +13,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     var objDay: WorkDay = WorkDay()
     var objMenu: DateMenu = DateMenu()
     
-    func initWorkDay(){
+    func initMenu(){
         // 現在日時と最終日を初期化する
         objDay.initCurrentDate()
         
@@ -90,7 +90,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     /// - Returns: <#return value description#>
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
         
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "DateSectionHeader", for: indexPath) as? DateSectionHeader else {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeader", for: indexPath) as? SectionHeader else {
             fatalError("Could not find proper header")
         }
         
