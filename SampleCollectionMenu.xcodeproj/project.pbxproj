@@ -10,6 +10,7 @@
 		56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0CE20A90BAE00A19912 /* DateMenu.swift */; };
 		56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* SectionHeader.swift */; };
 		56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* SectionHeader.xib */; };
+		56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D420AA63D300A19912 /* MenuCell.swift */; };
 		F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C68920A7B9D00006D463 /* AppDelegate.swift */; };
 		F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C68B20A7B9D00006D463 /* ViewController.swift */; };
 		F392C68F20A7B9D10006D463 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F392C68D20A7B9D10006D463 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		56CFA0CE20A90BAE00A19912 /* DateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMenu.swift; sourceTree = "<group>"; };
 		56CFA0D020A95A4600A19912 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		56CFA0D220A95AD500A19912 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
+		56CFA0D420AA63D300A19912 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		F392C68620A7B9D00006D463 /* SampleCollectionMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleCollectionMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F392C68920A7B9D00006D463 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F392C68B20A7B9D00006D463 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				56CFA0D220A95AD500A19912 /* SectionHeader.xib */,
 				F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */,
 				F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */,
+				56CFA0D420AA63D300A19912 /* MenuCell.swift */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			files = (
 				F392C6C620A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift in Sources */,
 				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
+				56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
 				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,
 				F392C6C420A82C720006D463 /* WorkDay.swift in Sources */,

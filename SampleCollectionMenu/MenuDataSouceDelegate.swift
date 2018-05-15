@@ -13,6 +13,8 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     var objDay: WorkDay = WorkDay()
     var objMenu: DateMenu = DateMenu()
     
+    var prevIndexPath: IndexPath? = nil
+    
     func initMenu(){
         // 現在日時と最終日を初期化する
         objDay.initCurrentDate()
@@ -48,6 +50,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         let weekname: String = targetDate.weekName
         cell.dateLabel.text = date
         cell.weekLabel.text = weekname
+        cell.initCellCondition()
         return cell
     }
     
@@ -73,8 +76,14 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
-        if let cell = collectionView.cellForItem(at: indexPath){
-            cell.backgroundColor = UIColor(named: "orange")
+        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
+            cell.afterSelectedItem()
+            
+            if let constIndexPath = prevIndexPath{
+                collectionView.reloadItems(at: [constIndexPath])
+            }
+            
+            prevIndexPath = indexPath
         }
     }
     

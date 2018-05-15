@@ -13,4 +13,9 @@ protocol MenuCellProtocol : class{
     
     /// selectした後に何かするのに使う
     func afterSelectedItem()
+    
+    
+    
+    /// 初期のcellの状態
+    func initCellCondition()
 }

@@ -24,4 +24,7 @@ extension DateCell: MenuCellProtocol{
         dataView.backgroundColor = UIColor.orange
     }
     
+    func initCellCondition() {
+        dataView.backgroundColor = UIColor.white
+    }
 }
