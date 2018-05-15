@@ -6,7 +6,7 @@
 //  Copyright © 2018年 平塚俊輔. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol MenuCellProtocol : class{
     
@@ -14,8 +14,13 @@ protocol MenuCellProtocol : class{
     /// selectした後に何かするのに使う
     func afterSelectedItem()
     
-    
-    
     /// 初期のcellの状態
     func initCellCondition()
+}
+
+extension UICollectionViewCell {
+    
+    func getIndexPath(_ collectionView: UICollectionView) -> IndexPath? {
+        return collectionView.indexPath(for: self)
+    }
 }

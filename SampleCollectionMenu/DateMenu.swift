@@ -10,6 +10,8 @@ import Foundation
 
 protocol CollectionMenu: class{
     
+    var arySection: [String] {get set}
+    var aryRows: [Int] {get set}
 }
 
 class DateMenu: CollectionMenu{
@@ -18,7 +20,9 @@ class DateMenu: CollectionMenu{
     /// <#Description#>
     var arySection: [String] = []
     var aryRows: [Int] = []
-    var aryStartDate: [Date] = []
+    
+    
+    lazy var aryStartDate: [Date] = []
     
     
     /// <#Description#>

@@ -10,12 +10,15 @@ import UIKit
 
 class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
     
-    var objDay: WorkDay = WorkDay()
+    
     var objMenu: DateMenu = DateMenu()
     
     var prevIndexPath: IndexPath? = nil
     
     func initMenu(){
+        
+        var objDay: WorkDay = WorkDay()
+        
         // 現在日時と最終日を初期化する
         objDay.initCurrentDate()
         
@@ -82,8 +85,26 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             if let constIndexPath = prevIndexPath{
                 collectionView.reloadItems(at: [constIndexPath])
             }
-            
+            // 前の選択cellをセット
             prevIndexPath = indexPath
+            
+//            var frame: CGRect = cell.frame
+//            frame.origin.x = 100
+//            collectionView.scrollRectToVisible(frame, animated: true)
+            
+            // 現在表示されているcellを取得
+//            let visibleCells = collectionView.visibleCells
+//            
+//            if visibleCells.count > 2{
+//                let visibleCell = visibleCells[1]
+//                if let toIndexPath: IndexPath = visibleCell.getIndexPath(collectionView){
+//                    
+//                }
+//            }
+            
+            // cellを移動
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            
         }
     }
     
@@ -121,3 +142,5 @@ extension MenuDataSouceDelegate: ScrollActionDelegate{
     
     
 }
+
+
