@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="SampleCollectionMenu" customModuleProvider="target">
             <connections>
-                <outlet property="dataview" destination="nCQ-Kn-S4A" id="hd6-nc-G3y"/>
+                <outlet property="dataview" destination="nCQ-Kn-S4A" id="wTm-hV-cfW"/>
                 <outlet property="menuview" destination="9fv-bb-CFo" id="IMn-CL-nLQ"/>
             </connections>
         </placeholder>
@@ -34,7 +34,7 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCQ-Kn-S4A">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCQ-Kn-S4A" customClass="InfiniteScrollView" customModule="SampleCollectionMenu" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="75" width="375" height="592"/>
                 </scrollView>
             </subviews>

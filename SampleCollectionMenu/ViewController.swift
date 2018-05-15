@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var menuview: UICollectionView!
-    @IBOutlet weak var dataview: UIScrollView!
+    @IBOutlet weak var dataview: InfiniteScrollView!
     
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         return layout
     }()
     
-    var objDatasourceDelegate: MenuDataSouceDelegate = MenuDataSouceDelegate()
+    fileprivate lazy var objDatasourceDelegate: MenuDataSouceDelegate = MenuDataSouceDelegate()
     
     /**
      xibを読み込む
@@ -45,6 +45,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         _initCollectionView()
+        
+        
     }
     
     fileprivate func _initCollectionView(){
@@ -65,6 +67,36 @@ class ViewController: UIViewController {
         
         menuview.reloadData()
 
+    }
+    
+    fileprivate func _initPaging(){
+        
+        // 1
+        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        view1.backgroundColor = UIColor.red
+        
+        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        view2.backgroundColor = UIColor.blue
+        
+        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        view3.backgroundColor = UIColor.green
+        
+        // 2
+        dataview.numPages = 3
+        dataview.viewObjects = [view1, view2, view3]
+        
+        // 3
+        dataview.setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        _initPaging()
     }
 
     override func didReceiveMemoryWarning() {
