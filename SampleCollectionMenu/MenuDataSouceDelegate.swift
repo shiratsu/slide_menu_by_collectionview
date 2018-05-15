@@ -94,16 +94,24 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             
             // 現在表示されているcellを取得
 //            let visibleCells = collectionView.visibleCells
-//            
+//
 //            if visibleCells.count > 2{
 //                let visibleCell = visibleCells[1]
 //                if let toIndexPath: IndexPath = visibleCell.getIndexPath(collectionView){
-//                    
+//
 //                }
 //            }
+            if indexPath.row > 1{
+                let toIndxPath: IndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
+                // cellを移動
+                collectionView.scrollToItem(at: toIndxPath, at: .centeredHorizontally, animated: true)
+            }else{
+                // cellを移動
+                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
             
-            // cellを移動
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            
+            
             
         }
     }
