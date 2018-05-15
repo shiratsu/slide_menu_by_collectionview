@@ -100,3 +100,15 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         return UICollectionReusableView()
     }
 }
+extension MenuDataSouceDelegate: ScrollActionDelegate{
+    
+    
+    /// scroll後のactionを定義
+    ///
+    /// - Parameter direction: <#direction description#>
+    func afterScroll(_ direction: ScrollDirection) {
+        
+    }
+    
+    
+}

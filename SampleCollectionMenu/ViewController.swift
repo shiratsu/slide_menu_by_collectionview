@@ -87,6 +87,8 @@ class ViewController: UIViewController {
         
         // 3
         dataview.setup()
+        
+        dataview.delegate = objDatasourceDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {

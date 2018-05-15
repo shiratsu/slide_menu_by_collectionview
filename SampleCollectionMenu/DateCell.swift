@@ -12,6 +12,16 @@ class DateCell: UICollectionViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weekLabel: UILabel!
+    @IBOutlet weak var dataView: UIView!
     
+}
+
+extension DateCell: MenuCellProtocol{
+    
+    
+    /// 選択した後に呼ばれる
+    func afterSelectedItem() {
+        dataView.backgroundColor = UIColor.orange
+    }
     
 }
