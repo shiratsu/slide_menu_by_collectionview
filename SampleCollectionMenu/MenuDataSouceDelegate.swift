@@ -103,6 +103,12 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         }
     }
     
+    
+    /// 指定ポジションまで移動
+    ///
+    /// - Parameters:
+    ///   - indexPath: <#indexPath description#>
+    ///   - collectionView: <#collectionView description#>
     fileprivate func _scrollToSpecificPath(_ indexPath: IndexPath, collectionView: UICollectionView){
         
         var toIndexPath: IndexPath? = nil
