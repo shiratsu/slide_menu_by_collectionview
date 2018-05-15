@@ -15,9 +15,9 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     
     var prevIndexPath: IndexPath? = nil
     
-    lazy var intLastSection: Int = 0
+    var intLastSection: Int = 0
     
-    lazy var intLastRowCount: Int = 0
+    var intLastRowCount: Int = 0
     
     func initMenu(){
         
@@ -92,8 +92,8 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
             cell.afterSelectedItem()
             
-            if let constIndexPath = prevIndexPath{
-                collectionView.reloadItems(at: [constIndexPath])
+            if let constIndexPath = prevIndexPath,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+                prevCell.initCellCondition()
             }
             // 前の選択cellをセット
             prevIndexPath = indexPath
@@ -115,7 +115,15 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if intLastSection != indexPath.section{
             if indexPath.row > 1{
-                toIndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
+                
+                // 多分ここでバグが出てる
+                // indexPath.rowがラストを越えたら、次のsectionにする
+                let tmpRowCount: Int = objMenu.aryRows[indexPath.section]
+                if indexPath.row < tmpRowCount-1{
+                    toIndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
+                }else{
+                    toIndexPath = indexPath
+                }
                 
             }else{
                 toIndexPath = indexPath
@@ -127,12 +135,14 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             if intDiff < 5{
                 toIndexPath = indexPath
             }else{
+                
                 toIndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
             }
         }
         
         if let constIndexPath = toIndexPath{
             // cellを移動
+            print(constIndexPath)
             collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
@@ -159,17 +169,6 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         return UICollectionReusableView()
     }
 }
-extension MenuDataSouceDelegate: ScrollActionDelegate{
-    
-    
-    /// scroll後のactionを定義
-    ///
-    /// - Parameter direction: <#direction description#>
-    func afterScroll(_ direction: ScrollDirection) {
-        
-    }
-    
-    
-}
+
 
 

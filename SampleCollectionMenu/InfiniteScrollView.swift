@@ -113,7 +113,6 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
     }
     
     // 5
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageWidth = frame.size.width
         let page = floor((contentOffset.x - (pageWidth/2)) / pageWidth) + 1
@@ -133,7 +132,7 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
             // 前に進む
             actionDelegate?.afterScroll(.left)
         }else{
-            // 前に進む
+            // 戻る
             actionDelegate?.afterScroll(.right)
         }
         

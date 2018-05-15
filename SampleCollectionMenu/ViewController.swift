@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var menuview: UICollectionView!
     @IBOutlet weak var dataview: InfiniteScrollView!
     
+    fileprivate lazy var screenWidth : CGFloat = UIScreen.main.bounds.width
+    
     fileprivate lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset  = UIEdgeInsetsMake(16, 16, 32, 16)
@@ -72,13 +74,13 @@ class ViewController: UIViewController {
     fileprivate func _initPaging(){
         
         // 1
-        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
         view1.backgroundColor = UIColor.red
         
-        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
         view2.backgroundColor = UIColor.blue
         
-        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: dataview.frame.size.width, height: dataview.frame.size.height))
+        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
         view3.backgroundColor = UIColor.green
         
         // 2
@@ -88,7 +90,7 @@ class ViewController: UIViewController {
         // 3
         dataview.setup()
         
-        dataview.delegate = objDatasourceDelegate
+        dataview.actionDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,3 +111,39 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: ScrollActionDelegate{
+    
+    
+    /// scrollした後
+    ///
+    /// - Parameter direction: <#direction description#>
+    func afterScroll(_ direction: ScrollDirection) {
+        
+        if let currentSelectPaths: [IndexPath] = menuview.indexPathsForSelectedItems,currentSelectPaths.count > 0{
+            
+            switch direction{
+            case .left:
+                break
+            case .right:
+                break
+            default:
+                break
+            }
+            
+        }else{
+            switch direction{
+            case .left:
+                menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                break
+            case .right:
+                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                
+                break
+            default:
+                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                break
+            }
+        }
+        
+    }
+}
