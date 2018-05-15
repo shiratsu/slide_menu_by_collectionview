@@ -18,9 +18,3 @@ protocol MenuCellProtocol : class{
     func initCellCondition()
 }
 
-extension UICollectionViewCell {
-    
-    func getIndexPath(_ collectionView: UICollectionView) -> IndexPath? {
-        return collectionView.indexPath(for: self)
-    }
-}

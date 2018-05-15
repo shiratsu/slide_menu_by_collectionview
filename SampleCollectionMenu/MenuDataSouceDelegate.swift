@@ -15,6 +15,10 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     
     var prevIndexPath: IndexPath? = nil
     
+    lazy var intLastSection: Int = 0
+    
+    lazy var intLastRowCount: Int = 0
+    
     func initMenu(){
         
         var objDay: WorkDay = WorkDay()
@@ -24,6 +28,12 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         // メニューデータを作成する
         objMenu.initMenu(90, fromDate: objDay.nowDate)
+        
+        // 最後のsecion
+        intLastSection = objMenu.arySection.count-1
+        
+        // 最後のsectionのrow
+        intLastRowCount = objMenu.aryRows[intLastSection]
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,31 +98,36 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             // 前の選択cellをセット
             prevIndexPath = indexPath
             
-//            var frame: CGRect = cell.frame
-//            frame.origin.x = 100
-//            collectionView.scrollRectToVisible(frame, animated: true)
+            _scrollToSpecificPath(indexPath, collectionView: collectionView)
             
-            // 現在表示されているcellを取得
-//            let visibleCells = collectionView.visibleCells
-//
-//            if visibleCells.count > 2{
-//                let visibleCell = visibleCells[1]
-//                if let toIndexPath: IndexPath = visibleCell.getIndexPath(collectionView){
-//
-//                }
-//            }
+        }
+    }
+    
+    fileprivate func _scrollToSpecificPath(_ indexPath: IndexPath, collectionView: UICollectionView){
+        
+        var toIndexPath: IndexPath? = nil
+        
+        if intLastSection != indexPath.section{
             if indexPath.row > 1{
-                let toIndxPath: IndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
-                // cellを移動
-                collectionView.scrollToItem(at: toIndxPath, at: .centeredHorizontally, animated: true)
+                toIndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
+                
             }else{
-                // cellを移動
-                collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                toIndexPath = indexPath
             }
+        }else{
             
+            let intDiff: Int = intLastRowCount-indexPath.row
             
-            
-            
+            if intDiff < 5{
+                toIndexPath = indexPath
+            }else{
+                toIndexPath = IndexPath(row: indexPath.row+1, section: indexPath.section)
+            }
+        }
+        
+        if let constIndexPath = toIndexPath{
+            // cellを移動
+            collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
     
