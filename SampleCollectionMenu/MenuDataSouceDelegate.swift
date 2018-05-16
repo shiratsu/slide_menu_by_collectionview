@@ -101,22 +101,43 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
-        
-        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
-            cell.afterSelectedItem()
-            
-            if let constIndexPath = prevIndexPath
-                ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
-                prevCell.initCellCondition()
-            }
-            actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
-            
-            // 前の選択cellをセット
-            prevIndexPath = indexPath
-            
-            _scrollToSpecificPath(indexPath, collectionView: collectionView)
-            
+        guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
+            return
         }
+        
+        if let constIndexPath = prevIndexPath,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+            
+            if prevCell.isSelect == true{
+                prevCell.initCellCondition()
+                if constIndexPath != indexPath{
+                    cell.afterSelectedItem()
+                }
+            }else{
+                cell.afterSelectedItem()
+            }
+            
+        }else{
+            cell.afterSelectedItem()
+        }
+        
+        actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
+        
+        // 前の選択cellをセット
+        prevIndexPath = indexPath
+        
+        _scrollToSpecificPath(indexPath, collectionView: collectionView)
+        
+        
+//        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
+//            cell.afterSelectedItem()
+//
+//            if let constIndexPath = prevIndexPath
+//                ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+//                prevCell.initCellCondition()
+//            }
+//
+//
+//        }
         
     }
     
