@@ -141,12 +141,12 @@ extension ViewController: CollectionMenuProtocol{
             // １番前
             if indexPath.row == 0 && indexPath.section == 0{
                 if indexPath.row < constIndexPath.row{
-                    _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
+                    _callScrollMethod(x: 0)
                 }
             // 一番後ろ
             }else if indexPath.row == intLastIndexRow && indexPath.section == intLastSection{
                 if indexPath.row > constIndexPath.row{
-                    _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+                    _callScrollMethod(x: view.frame.width*2)
                 }
                 
             }else{
