@@ -119,8 +119,6 @@ extension ViewController: ScrollActionDelegate{
     /// - Parameter direction: <#direction description#>
     func afterScroll(_ direction: ScrollDirection) {
         
-        print(menuview.indexPathsForSelectedItems)
-        
         if let currentSelectPaths: [IndexPath] = menuview.indexPathsForSelectedItems,currentSelectPaths.count > 0{
             
             let currentSelectPath: IndexPath = currentSelectPaths[0]
