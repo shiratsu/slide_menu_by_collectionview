@@ -119,12 +119,32 @@ extension ViewController: ScrollActionDelegate{
     /// - Parameter direction: <#direction description#>
     func afterScroll(_ direction: ScrollDirection) {
         
+        print(menuview.indexPathsForSelectedItems)
+        
         if let currentSelectPaths: [IndexPath] = menuview.indexPathsForSelectedItems,currentSelectPaths.count > 0{
+            
+            let currentSelectPath: IndexPath = currentSelectPaths[0]
             
             switch direction{
             case .left:
+                
+                if let nextSelectPath: IndexPath = _getNextPath(currentSelectPath
+                    , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
+                    , aryRow: objDatasourceDelegate.objMenu.aryRows){
+                    menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
+                    objDatasourceDelegate.collectionView(menuview, didSelectItemAt: nextSelectPath)
+                }
+                
                 break
             case .right:
+                
+                if let prevSelectPath: IndexPath = _getPrevPath(currentSelectPath
+                    , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
+                    , aryRow: objDatasourceDelegate.objMenu.aryRows){
+                    menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
+                    objDatasourceDelegate.collectionView(menuview, didSelectItemAt: prevSelectPath)
+                }
+                
                 break
             default:
                 break
@@ -133,17 +153,95 @@ extension ViewController: ScrollActionDelegate{
         }else{
             switch direction{
             case .left:
-                menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
+                objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 1, section: 0))
                 break
             case .right:
-                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
+                objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
                 
                 break
             default:
-                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
+                objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
                 break
             }
         }
         
+    }
+    
+    
+    /// 次のselectすべきものを取得
+    ///
+    /// - Parameters:
+    ///   - currentSelectPaths: <#currentSelectPaths description#>
+    ///   - intSectionCount: <#intSectionCount description#>
+    ///   - intRowCount: <#aryRow description#>
+    ///   - return IndexPath?
+    fileprivate func _getNextPath(_ currentSelectPath: IndexPath
+        , intSectionCount: Int
+        , aryRow: [Int]) -> IndexPath?{
+        
+        var toIndexPath: IndexPath?
+        
+        // １番最後のrowを取得
+        let intRowCount: Int = aryRow[currentSelectPath.section]
+        
+        // １番後ろのsectionじゃない場合
+        if currentSelectPath.section != intSectionCount-1{
+            
+            // sectionの中の１番後ろじゃない場合
+            if currentSelectPath.row != intRowCount-1{
+                
+                toIndexPath = IndexPath(row: currentSelectPath.row+1, section: currentSelectPath.section)
+            }else{
+                toIndexPath = IndexPath(row: 0, section: currentSelectPath.section+1)
+            }
+            
+        }else{
+            // sectionの中の１番後ろじゃない場合
+            if currentSelectPath.row != intRowCount-1{
+                toIndexPath = IndexPath(row: currentSelectPath.row+1, section: currentSelectPath.section)
+            }
+        }
+        
+        return toIndexPath
+    }
+
+    /// 前のselectすべきものを取得
+    ///
+    /// - Parameters:
+    ///   - currentSelectPath: <#currentSelectPaths description#>
+    ///   - intSectionCount: <#intSectionCount description#>
+    ///   - intRowCount: <#aryRow description#>
+    ///   - return IndexPath?
+    fileprivate func _getPrevPath(_ currentSelectPath: IndexPath
+        , intSectionCount: Int
+        , aryRow: [Int]) -> IndexPath?{
+        
+        var toIndexPath: IndexPath?
+        
+        // １番前のsectionじゃない場合
+        if currentSelectPath.section != 0{
+            
+            // sectionの中の１番後ろじゃない場合
+            if currentSelectPath.row != 0{
+                
+                toIndexPath = IndexPath(row: currentSelectPath.row-1, section: currentSelectPath.section)
+            }else{
+                // 前のsectionの一番後ろのrowに戻る
+                let prevLastRow: Int = aryRow[currentSelectPath.section-1]
+                
+                toIndexPath = IndexPath(row: prevLastRow, section: currentSelectPath.section-1)
+            }
+            
+        }else{
+            // sectionの中の１番後ろじゃない場合
+            if currentSelectPath.row != 0{
+                toIndexPath = IndexPath(row: currentSelectPath.row-1, section: currentSelectPath.section)
+            }
+        }
+        
+        return toIndexPath
     }
 }

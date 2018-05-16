@@ -89,6 +89,10 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
+        print(collectionView.indexPathsForSelectedItems)
+        
+        
+        
         if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
             cell.afterSelectedItem()
             

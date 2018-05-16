@@ -129,11 +129,11 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         
         // 方向を決定する
         if lastOffsetX > contentOffset.x{
-            // 前に進む
-            actionDelegate?.afterScroll(.left)
-        }else{
-            // 戻る
+            // 後ろ
             actionDelegate?.afterScroll(.right)
+        }else{
+            // 前
+            actionDelegate?.afterScroll(.left)
         }
         
         if page == 0 {

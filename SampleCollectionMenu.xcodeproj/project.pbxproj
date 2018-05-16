@@ -25,7 +25,6 @@
 		F392C6C020A82B450006D463 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6BF20A82B450006D463 /* DateExtension.swift */; };
 		F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C120A82BA10006D463 /* DateFormatters.swift */; };
 		F392C6C420A82C720006D463 /* WorkDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C320A82C720006D463 /* WorkDay.swift */; };
-		F392C6C620A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */; };
 		F392C6CA20A9E66B0006D463 /* InfiniteScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +70,6 @@
 		F392C6BF20A82B450006D463 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		F392C6C120A82BA10006D463 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		F392C6C320A82C720006D463 /* WorkDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDay.swift; sourceTree = "<group>"; };
-		F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuUICollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,7 +137,6 @@
 				56CFA0CE20A90BAE00A19912 /* DateMenu.swift */,
 				56CFA0D020A95A4600A19912 /* SectionHeader.swift */,
 				56CFA0D220A95AD500A19912 /* SectionHeader.xib */,
-				F392C6C520A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift */,
 				F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */,
 				56CFA0D420AA63D300A19912 /* MenuCell.swift */,
 			);
@@ -298,7 +295,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F392C6C620A9BCBF0006D463 /* MenuUICollectionViewFlowLayout.swift in Sources */,
 				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
 				56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
