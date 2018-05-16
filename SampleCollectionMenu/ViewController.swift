@@ -64,6 +64,7 @@ class ViewController: UIViewController {
         
         menuview.dataSource = objDatasourceDelegate
         menuview.delegate = objDatasourceDelegate
+        objDatasourceDelegate.actionDelegate = self
         
         objDatasourceDelegate.initMenu()
         
@@ -111,6 +112,68 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController: CollectionMenuProtocol{
+    
+    
+    /// selectした時に
+    ///
+    /// - Parameter indexPath: <#indexPath description#>
+    func afterSelected(_ indexPath: IndexPath, prevIndexPath: IndexPath?) {
+        
+        let intLastSection: Int = objDatasourceDelegate.objMenu.arySection.count-1
+        
+        let intLastIndexRow: Int = objDatasourceDelegate.objMenu.aryRows[intLastSection]
+        
+        guard let constIndexPath: IndexPath = prevIndexPath else{
+            _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+            return
+        }
+        
+        // 前のが小さい
+        if indexPath.section > constIndexPath.section{
+            _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+            
+        // 前のが大きい
+        }else if indexPath.section < constIndexPath.section{
+            _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
+        // 同じ
+        }else{
+            // １番前
+            if indexPath.row == 0 && indexPath.section == 0{
+                if indexPath.row < constIndexPath.row{
+                    _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
+                }
+            // 一番後ろ
+            }else if indexPath.row == intLastIndexRow && indexPath.section == intLastSection{
+                if indexPath.row > constIndexPath.row{
+                    _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+                }
+                
+            }else{
+                // 前のが大きい
+                if indexPath.row < constIndexPath.row{
+                    dataview.setContentOffset(CGPoint(x: dataview.contentOffset.x-view.frame.width, y: 0), animated: true)
+                    _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
+                    
+                // 前のが小さい
+                }else if indexPath.row > constIndexPath.row{
+                    _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+                }
+            }
+        }
+    }
+    
+    
+    /// scrollのメソッドをコール
+    ///
+    /// - Parameter x: <#x description#>
+    fileprivate func _callScrollMethod(x: CGFloat){
+        dataview.isCanCallAfter = false
+        dataview.setContentOffset(CGPoint(x: x, y: 0), animated: true)
+        dataview.scrollViewDidEndDecelerating(dataview)
+    }
+}
+
 extension ViewController: ScrollActionDelegate{
     
     
@@ -124,6 +187,8 @@ extension ViewController: ScrollActionDelegate{
             let currentSelectPath: IndexPath = currentSelectPaths[0]
             
             switch direction{
+            
+            /// 前に進む
             case .left:
                 
                 if let nextSelectPath: IndexPath = _getNextPath(currentSelectPath
@@ -131,9 +196,18 @@ extension ViewController: ScrollActionDelegate{
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
                     menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: nextSelectPath)
+                    
+                    // 一番後ろに来てしまった場合、scrollできないように、調整
+                    if nextSelectPath.row == objDatasourceDelegate.intLastRowCount-1 && nextSelectPath.section == objDatasourceDelegate.intLastSection{
+                        dataview.currentScrollPosition = .limit
+                    }
+                    
                 }
                 
                 break
+                
+                
+            /// 後ろに下がる
             case .right:
                 
                 if let prevSelectPath: IndexPath = _getPrevPath(currentSelectPath
@@ -141,10 +215,13 @@ extension ViewController: ScrollActionDelegate{
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
                     menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: prevSelectPath)
+                    
+                    // １番前に来ていた場合、scrollできないように調整
+                    if prevSelectPath.row == 0 && prevSelectPath.section == 0{
+                        dataview.currentScrollPosition = .zero
+                    }
                 }
                 
-                break
-            default:
                 break
             }
             
@@ -158,11 +235,11 @@ extension ViewController: ScrollActionDelegate{
                 menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
                 
+                // １番前に来ていた場合、scrollできないように調整
+                dataview.currentScrollPosition = .zero
+                
                 break
-            default:
-                menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
-                objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
-                break
+            
             }
         }
         
@@ -234,7 +311,7 @@ extension ViewController: ScrollActionDelegate{
             }
             
         }else{
-            // sectionの中の１番後ろじゃない場合
+            // sectionの中の１番前じゃない場合
             if currentSelectPath.row != 0{
                 toIndexPath = IndexPath(row: currentSelectPath.row-1, section: currentSelectPath.section)
             }

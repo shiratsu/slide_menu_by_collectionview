@@ -18,6 +18,11 @@ enum ScrollDirection : Int{
     case right = 2
 }
 
+enum ScrollPosition : Int{
+    case `default` = 0
+    case zero = 1
+    case limit = 2
+}
 
 /// action of scroll
 /// basically use this delegate after scroll
@@ -35,9 +40,14 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
 
     // 1
     var viewObjects: [UIView]?
+    var currentScrollPosition: ScrollPosition = .default
+    
     lazy var numPages: Int = 0
+    
     fileprivate lazy var screenWidth : CGFloat = UIScreen.main.bounds.width
-    fileprivate lazy var lastOffsetX: CGFloat = 0
+    fileprivate var lastOffsetX: CGFloat = 0
+    
+    var isCanCallAfter: Bool = true
     
     weak var actionDelegate: ScrollActionDelegate?
     
@@ -77,7 +87,7 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         newFrame.origin.y = 0
         scrollRectToVisible(newFrame, animated: false)
         
-        lastOffsetX = frame.origin.x
+        lastOffsetX = contentOffset.x
         
         layoutIfNeeded()
     }
@@ -127,22 +137,51 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         let pageWidth = frame.size.width
         let page : Int = Int(floor((contentOffset.x - (pageWidth/2)) / pageWidth) + 1)
         
-        // 方向を決定する
-        if lastOffsetX > contentOffset.x{
-            // 後ろ
-            actionDelegate?.afterScroll(.right)
-        }else{
-            // 前
-            actionDelegate?.afterScroll(.left)
+        if isCanCallAfter == true{
+            // 方向を決定する
+            if lastOffsetX > contentOffset.x{
+                // 後ろ
+                actionDelegate?.afterScroll(.right)
+                
+            }else if lastOffsetX < contentOffset.x{
+                // 前
+                actionDelegate?.afterScroll(.left)
+            }
         }
         
-        if page == 0 {
-            contentOffset = CGPoint(x: pageWidth*(CGFloat(numPages)), y: 0)
-        } else if page == numPages+1 {
-            contentOffset = CGPoint(x: pageWidth, y: 0)
+        // 一応保持しておいて
+        isCanCallAfter = true
+        
+        _checkScrollPosition(page, pageWidth: pageWidth)
+    }
+    
+    
+    
+    /// scrollpositionをチェックして、contentOffset.xを最終決定
+    ///
+    /// - Parameter page: <#page description#>
+    /// - Parameter pageWidth: <#page description#>
+    fileprivate func _checkScrollPosition(_ page: Int, pageWidth: CGFloat){
+        
+        switch currentScrollPosition {
+        case .zero:
+            contentOffset = CGPoint(x: 0, y: 0)
+            break
+        case .limit:
+            contentOffset = CGPoint(x: screenWidth*2, y: 0)
+            break
+        default:
+            if page == 0 {
+                contentOffset = CGPoint(x: pageWidth*(CGFloat(numPages)), y: 0)
+            } else if page == numPages+1 {
+                contentOffset = CGPoint(x: pageWidth, y: 0)
+            }
+            break
         }
         
         lastOffsetX = contentOffset.x
+        
+        currentScrollPosition = .default
     }
     
 

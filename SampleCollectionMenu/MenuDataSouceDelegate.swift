@@ -8,6 +8,16 @@
 
 import UIKit
 
+protocol CollectionMenuProtocol: class{
+    
+    
+    /// 選択終わったら
+    ///
+    /// - Parameter indexPath: <#indexPath description#>
+    /// - Parameter prevIndexPath: <#indexPath description#>
+    func afterSelected(_ indexPath: IndexPath, prevIndexPath: IndexPath?)
+}
+
 class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
     
     
@@ -18,6 +28,8 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     var intLastSection: Int = 0
     
     var intLastRowCount: Int = 0
+    
+    weak var actionDelegate: CollectionMenuProtocol?
     
     func initMenu(){
         
@@ -89,18 +101,26 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
-        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
-            cell.afterSelectedItem()
+        
+        
+        guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
+            return
+        }
+        cell.afterSelectedItem()
+        
+        if let constIndexPath = prevIndexPath
+            ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
             
-            if let constIndexPath = prevIndexPath,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
-                prevCell.initCellCondition()
-            }
-            // 前の選択cellをセット
-            prevIndexPath = indexPath
-            
-            _scrollToSpecificPath(indexPath, collectionView: collectionView)
+            prevCell.initCellCondition()
             
         }
+        
+        actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
+        
+        // 前の選択cellをセット
+        prevIndexPath = indexPath
+        
+        _scrollToSpecificPath(indexPath, collectionView: collectionView)
     }
     
     
