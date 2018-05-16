@@ -102,25 +102,22 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
         
-        
-        guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
-            return
-        }
-        cell.afterSelectedItem()
-        
-        if let constIndexPath = prevIndexPath
-            ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
+            cell.afterSelectedItem()
             
-            prevCell.initCellCondition()
+            if let constIndexPath = prevIndexPath
+                ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+                prevCell.initCellCondition()
+            }
+            actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
+            
+            // 前の選択cellをセット
+            prevIndexPath = indexPath
+            
+            _scrollToSpecificPath(indexPath, collectionView: collectionView)
             
         }
         
-        actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
-        
-        // 前の選択cellをセット
-        prevIndexPath = indexPath
-        
-        _scrollToSpecificPath(indexPath, collectionView: collectionView)
     }
     
     
