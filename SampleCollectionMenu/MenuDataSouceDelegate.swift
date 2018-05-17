@@ -79,18 +79,13 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if let constSelectedItemPath = selectedIndexPath,indexPath == constSelectedItemPath{
 
-//            cell.isSelected = true
-            cell.afterSelectedItem()
+            cell.isSelect = true
 
         }else{
-//            cell.isSelected = false
-            cell.initCellCondition()
+            cell.isSelect = false
             
         }
-        
-//        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.init(rawValue: 0))
-        
-        
+                
         return cell
     }
     
@@ -122,22 +117,25 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             return
         }
 
-        if let constSelectedItemPath = selectedIndexPath,indexPath == constSelectedItemPath{
+        
+        if let constSelectedItemPath = selectedIndexPath,let pcell: DateCell = collectionView.cellForItem(at: constSelectedItemPath) as? DateCell{
             
-//            cell.isSelected = false
-            cell.initCellCondition()
-            
-            selectedIndexPath = nil
+            if indexPath == constSelectedItemPath{
+                selectedIndexPath = nil
+                cell.isSelect = false
+            }else{
+                // 前の選択cellをセット
+                selectedIndexPath = indexPath
+                pcell.isSelect = false
+                cell.isSelect = true
+            }
             
         }else{
-//            cell.isSelected = true
-            cell.afterSelectedItem()
-            
             // 前の選択cellをセット
             selectedIndexPath = indexPath
-            
-            
+            cell.isSelect = true
         }
+        
         
         _scrollToSpecificPath(indexPath, collectionView: collectionView)
         

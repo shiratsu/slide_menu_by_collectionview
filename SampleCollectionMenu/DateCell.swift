@@ -14,26 +14,33 @@ class DateCell: UICollectionViewCell {
     @IBOutlet weak var weekLabel: UILabel!
     @IBOutlet weak var dataView: UIView!
     
-    override var isSelected: Bool{
-        willSet{
-            if newValue == true{
-                afterSelectedItem()
-            }else{
-                initCellCondition()
-            }
+    var isSelect: Bool = false{
+        didSet{
+            setConditionBySelected(isSelect)
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         initCellCondition()
-        isSelected = false
+        isSelect = false
     }
     
 }
 
 extension DateCell: MenuCellProtocol{
     
+    
+    /// <#Description#>
+    ///
+    /// - Parameter isSelect: <#isSelect description#>
+    func setConditionBySelected(_ isSelect: Bool){
+        if isSelect == true{
+            afterSelectedItem()
+        }else{
+            initCellCondition()
+        }
+    }
     
     /// 選択した後に呼ばれる
     func afterSelectedItem() {
