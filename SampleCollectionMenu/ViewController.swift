@@ -51,6 +51,8 @@ class ViewController: UIViewController {
         
     }
     
+    
+    /// ページングメニュー初期化
     fileprivate func _initCollectionView(){
         
         let nib  = UINib(nibName: "DateCell", bundle:nil)
@@ -74,6 +76,8 @@ class ViewController: UIViewController {
 
     }
     
+    
+    /// ページングされる側初期化
     fileprivate func _initPaging(){
         
         // 1
@@ -117,11 +121,13 @@ class ViewController: UIViewController {
 extension ViewController: CollectionMenuProtocol{
     
     
-    /// selectした時に
+    /// ヘッダのメニューで選択した時に
+    /// 最後に、実際のscroll処理が呼ばれる
     ///
     /// - Parameter indexPath: <#indexPath description#>
     func afterSelected(_ indexPath: IndexPath, selectedIndexPath prevIndexPath: IndexPath?) {
         
+        // 最後のrow,sectionをセット
         let intLastSection: Int = objDatasourceDelegate.objMenu.arySection.count-1
         
         let intLastIndexRow: Int = objDatasourceDelegate.objMenu.aryRows[intLastSection]
@@ -169,6 +175,7 @@ extension ViewController: CollectionMenuProtocol{
     
     
     /// scrollのメソッドをコール
+    /// collectionviewの選択後にcallされる。横スライド分だけなので、yは0
     ///
     /// - Parameter x: <#x description#>
     fileprivate func _callScrollMethod(x: CGFloat){
@@ -181,7 +188,8 @@ extension ViewController: CollectionMenuProtocol{
 extension ViewController: ScrollActionDelegate{
     
     
-    /// scrollした後
+    /// 横scrollした後
+    /// menuを選択した際はここは通らない。
     ///
     /// - Parameter direction: <#direction description#>
     func afterScroll(_ direction: ScrollDirection) {
@@ -189,6 +197,7 @@ extension ViewController: ScrollActionDelegate{
         if let currentSelectPaths: [IndexPath] = menuview.indexPathsForSelectedItems,currentSelectPaths.count > 0{
             
             let currentSelectPath: IndexPath = currentSelectPaths[0]
+            let visibleIndexPaths: [IndexPath] = menuview.indexPathsForVisibleItems
             
             switch direction{
             
@@ -198,6 +207,13 @@ extension ViewController: ScrollActionDelegate{
                 if let nextSelectPath: IndexPath = _getNextPath(currentSelectPath
                     , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
+                    
+                    // 画面外に選択のセルがでていた場合、まずは選択してたセルまで戻る
+                    // そうしないと選択できない。
+                    if visibleIndexPaths.index(of: nextSelectPath) == nil{
+                        menuview.scrollToItem(at: nextSelectPath, at: .centeredHorizontally, animated: true)
+                    }
+                    
                     menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.isScroll = false
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: nextSelectPath)
@@ -218,6 +234,13 @@ extension ViewController: ScrollActionDelegate{
                 if let prevSelectPath: IndexPath = _getPrevPath(currentSelectPath
                     , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
+                    
+                    // 画面外に選択のセルがでていた場合、まずは選択してたセルまで戻る
+                    // そうしないと選択できない。
+                    if visibleIndexPaths.index(of: prevSelectPath) == nil{
+                        menuview.scrollToItem(at: prevSelectPath, at: .centeredHorizontally, animated: true)
+                    }
+                    
                     menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.isScroll = false
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: prevSelectPath)
@@ -235,10 +258,14 @@ extension ViewController: ScrollActionDelegate{
             
         }else{
             switch direction{
+                
+            /// 前に進む
             case .left:
                 menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 1, section: 0))
                 break
+            
+            /// 後ろに下がる
             case .right:
                 menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
@@ -311,7 +338,7 @@ extension ViewController: ScrollActionDelegate{
         // １番前のsectionじゃない場合
         if currentSelectPath.section != 0{
             
-            // sectionの中の１番後ろじゃない場合
+            // sectionの中の１番前じゃない場合
             if currentSelectPath.row != 0{
                 
                 toIndexPath = IndexPath(row: currentSelectPath.row-1, section: currentSelectPath.section)

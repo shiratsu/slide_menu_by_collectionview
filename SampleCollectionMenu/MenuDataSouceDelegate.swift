@@ -124,7 +124,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
                 selectedIndexPath = nil
                 cell.isSelect = false
             }else{
-                // 前の選択cellをセット
+                // 選択したcellまでスクロール
                 _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
                 selectedIndexPath = indexPath
                 pcell.isSelect = false
@@ -133,7 +133,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             }
             
         }else{
-            // 前の選択cellをセット
+            // 選択したcellまでスクロール
             _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
             selectedIndexPath = indexPath
             cell.isSelect = true
@@ -142,23 +142,23 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
     }
     
+    
+    /// 選択したcellまでスクロールする
+    ///
+    /// - Parameters:
+    ///   - isTmpScroll: <#isTmpScroll description#>
+    ///   - currentIndexPath: <#currentIndexPath description#>
+    ///   - selectedPath: <#selectedPath description#>
     fileprivate func _scrollSlideView(_ isTmpScroll: Bool,currentIndexPath: IndexPath,selectedPath: IndexPath?){
+        
+        // collection menuでなく、スワイプでscrollした場合は、何もしない
         if isTmpScroll{
             actionDelegate?.afterSelected(currentIndexPath, selectedIndexPath: selectedIndexPath)
         }else{
             isScroll = true
         }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
-//            return
-//        }
-//        cell.isSelected = false
-//
-//        selectedIndexPath = nil
-//    }
-    
+  
     /// 指定ポジションまで移動
     ///
     /// - Parameters:
@@ -197,8 +197,6 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if let constIndexPath = toIndexPath{
             // cellを移動
-            print("test")
-            print(constIndexPath)
             collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
