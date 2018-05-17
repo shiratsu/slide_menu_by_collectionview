@@ -29,6 +29,8 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     
     var intLastRowCount: Int = 0
     
+    var isScroll: Bool = true
+    
     weak var actionDelegate: CollectionMenuProtocol?
     
     func initMenu(){
@@ -111,8 +113,6 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
-        actionDelegate?.afterSelected(indexPath, selectedIndexPath: selectedIndexPath)
-        
         guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
             return
         }
@@ -125,20 +125,29 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
                 cell.isSelect = false
             }else{
                 // 前の選択cellをセット
+                _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
                 selectedIndexPath = indexPath
                 pcell.isSelect = false
                 cell.isSelect = true
+                _scrollToSpecificPath(indexPath, collectionView: collectionView)
             }
             
         }else{
             // 前の選択cellをセット
+            _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
             selectedIndexPath = indexPath
             cell.isSelect = true
+            _scrollToSpecificPath(indexPath, collectionView: collectionView)
         }
         
-        
-        _scrollToSpecificPath(indexPath, collectionView: collectionView)
-        
+    }
+    
+    fileprivate func _scrollSlideView(_ isTmpScroll: Bool,currentIndexPath: IndexPath,selectedPath: IndexPath?){
+        if isTmpScroll{
+            actionDelegate?.afterSelected(currentIndexPath, selectedIndexPath: selectedIndexPath)
+        }else{
+            isScroll = true
+        }
     }
     
 //    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

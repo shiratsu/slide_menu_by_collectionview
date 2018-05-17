@@ -142,13 +142,15 @@ extension ViewController: CollectionMenuProtocol{
         }else{
             // １番前
             if indexPath.row == 0 && indexPath.section == 0{
-                if indexPath.row < constIndexPath.row{
+                if indexPath.row <= constIndexPath.row{
+                    dataview.currentScrollPosition = .zero
                     _callScrollMethod(x: 0)
                 }
             // 一番後ろ
             }else if indexPath.row == intLastIndexRow && indexPath.section == intLastSection{
-                if indexPath.row > constIndexPath.row{
-                    _callScrollMethod(x: view.frame.width*2)
+                if indexPath.row >= constIndexPath.row{
+                    dataview.currentScrollPosition = .limit
+                    _callScrollMethod(x: view.frame.width*4)
                 }
                 
             }else{
@@ -197,6 +199,7 @@ extension ViewController: ScrollActionDelegate{
                     , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
                     menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
+                    objDatasourceDelegate.isScroll = false
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: nextSelectPath)
                     
                     // 一番後ろに来てしまった場合、scrollできないように、調整
@@ -216,6 +219,7 @@ extension ViewController: ScrollActionDelegate{
                     , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
                     menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
+                    objDatasourceDelegate.isScroll = false
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: prevSelectPath)
                     
                     // １番前に来ていた場合、scrollできないように調整
@@ -224,6 +228,8 @@ extension ViewController: ScrollActionDelegate{
                     }
                 }
                 
+                break
+            case .default:
                 break
             }
             
@@ -241,7 +247,8 @@ extension ViewController: ScrollActionDelegate{
                 dataview.currentScrollPosition = .zero
                 
                 break
-            
+            case .default:
+                break
             }
         }
         
@@ -279,6 +286,9 @@ extension ViewController: ScrollActionDelegate{
             // sectionの中の１番後ろじゃない場合
             if currentSelectPath.row != intRowCount-1{
                 toIndexPath = IndexPath(row: currentSelectPath.row+1, section: currentSelectPath.section)
+                
+            }else{
+                toIndexPath = IndexPath(row: intRowCount-1, section: currentSelectPath.section)
             }
         }
         
@@ -316,6 +326,8 @@ extension ViewController: ScrollActionDelegate{
             // sectionの中の１番前じゃない場合
             if currentSelectPath.row != 0{
                 toIndexPath = IndexPath(row: currentSelectPath.row-1, section: currentSelectPath.section)
+            }else{
+                toIndexPath = IndexPath(row: 0, section: currentSelectPath.section)
             }
         }
         

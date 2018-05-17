@@ -14,6 +14,7 @@ import UIKit
 /// - left: go foward
 /// - right: oposit go foward
 enum ScrollDirection : Int{
+    case `default` = 0
     case left = 1
     case right = 2
 }
@@ -41,12 +42,14 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
     // 1
     var viewObjects: [UIView]?
     var currentScrollPosition: ScrollPosition = .default
+    var currentDirection: ScrollDirection = .default
     
     lazy var numPages: Int = 0
     
     fileprivate lazy var screenWidth : CGFloat = UIScreen.main.bounds.width
     fileprivate var lastOffsetX: CGFloat = 0
     
+    // collectionviewのヘッダのメニューで選択してscrollする際はfalseをセット
     var isCanCallAfter: Bool = true
     
     weak var actionDelegate: ScrollActionDelegate?
@@ -137,15 +140,18 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         let pageWidth = frame.size.width
         let page : Int = Int(floor((contentOffset.x - (pageWidth/2)) / pageWidth) + 1)
         
+        // 画面自体をscrollしてる
         if isCanCallAfter == true{
             // 方向を決定する
             if lastOffsetX > contentOffset.x{
                 // 後ろ
-                actionDelegate?.afterScroll(.right)
+                currentDirection = .right
+                actionDelegate?.afterScroll(currentDirection)
                 
             }else if lastOffsetX < contentOffset.x{
                 // 前
-                actionDelegate?.afterScroll(.left)
+                currentDirection = .left
+                actionDelegate?.afterScroll(currentDirection)
             }
         }
         
@@ -168,14 +174,25 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
             contentOffset = CGPoint(x: 0, y: 0)
             break
         case .limit:
-            contentOffset = CGPoint(x: screenWidth*2, y: 0)
+            contentOffset = CGPoint(x: screenWidth*4, y: 0)
             break
         default:
-            if page == 0 {
-                contentOffset = CGPoint(x: pageWidth*(CGFloat(numPages)), y: 0)
-            } else if page == numPages+1 {
-                contentOffset = CGPoint(x: pageWidth, y: 0)
+            
+            let endOffsetX: CGFloat = screenWidth*4
+            
+            if lastOffsetX == endOffsetX && currentDirection == .left{
+                contentOffset = CGPoint(x: screenWidth*4, y: 0)
+            }else if lastOffsetX == 0 && currentDirection == .right{
+                contentOffset = CGPoint(x: 0, y: 0)
+            }else{
+                if page == 0 {
+                    contentOffset = CGPoint(x: pageWidth*(CGFloat(numPages)), y: 0)
+                } else if page == numPages+1 {
+                    contentOffset = CGPoint(x: pageWidth, y: 0)
+                }
             }
+            
+            
             break
         }
         
