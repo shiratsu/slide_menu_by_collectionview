@@ -14,8 +14,8 @@ protocol CollectionMenuProtocol: class{
     /// 選択終わったら
     ///
     /// - Parameter indexPath: <#indexPath description#>
-    /// - Parameter prevIndexPath: <#indexPath description#>
-    func afterSelected(_ indexPath: IndexPath, prevIndexPath: IndexPath?)
+    /// - Parameter selectedIndexPath: <#indexPath description#>
+    func afterSelected(_ indexPath: IndexPath, selectedIndexPath: IndexPath?)
 }
 
 class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
@@ -23,7 +23,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     
     var objMenu: DateMenu = DateMenu()
     
-    var prevIndexPath: IndexPath? = nil
+    var selectedIndexPath: IndexPath? = nil
     
     var intLastSection: Int = 0
     
@@ -56,6 +56,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         return objMenu.arySection.count
     }
     
+    
     /**
      セル一つ一つの定義
      
@@ -75,7 +76,21 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         let weekname: String = targetDate.weekName
         cell.dateLabel.text = date
         cell.weekLabel.text = weekname
-        cell.initCellCondition()
+        
+        if let constSelectedItemPath = selectedIndexPath,indexPath == constSelectedItemPath{
+
+//            cell.isSelected = true
+            cell.afterSelectedItem()
+
+        }else{
+//            cell.isSelected = false
+            cell.initCellCondition()
+            
+        }
+        
+//        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition.init(rawValue: 0))
+        
+        
         return cell
     }
     
@@ -101,46 +116,41 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
      */
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath){
         
+        actionDelegate?.afterSelected(indexPath, selectedIndexPath: selectedIndexPath)
+        
         guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
             return
         }
-        
-        if let constIndexPath = prevIndexPath,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
+
+        if let constSelectedItemPath = selectedIndexPath,indexPath == constSelectedItemPath{
             
-            if prevCell.isSelect == true{
-                prevCell.initCellCondition()
-                if constIndexPath != indexPath{
-                    cell.afterSelectedItem()
-                }
-            }else{
-                cell.afterSelectedItem()
-            }
+//            cell.isSelected = false
+            cell.initCellCondition()
+            
+            selectedIndexPath = nil
             
         }else{
+//            cell.isSelected = true
             cell.afterSelectedItem()
+            
+            // 前の選択cellをセット
+            selectedIndexPath = indexPath
+            
+            
         }
-        
-        actionDelegate?.afterSelected(indexPath, prevIndexPath: prevIndexPath)
-        
-        // 前の選択cellをセット
-        prevIndexPath = indexPath
         
         _scrollToSpecificPath(indexPath, collectionView: collectionView)
         
-        
-//        if let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell{
-//            cell.afterSelectedItem()
-//
-//            if let constIndexPath = prevIndexPath
-//                ,let prevCell: DateCell = collectionView.cellForItem(at: constIndexPath) as? DateCell{
-//                prevCell.initCellCondition()
-//            }
-//
-//
-//        }
-        
     }
     
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
+//            return
+//        }
+//        cell.isSelected = false
+//
+//        selectedIndexPath = nil
+//    }
     
     /// 指定ポジションまで移動
     ///
@@ -180,6 +190,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if let constIndexPath = toIndexPath{
             // cellを移動
+            print("test")
             print(constIndexPath)
             collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }

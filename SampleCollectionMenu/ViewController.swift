@@ -61,6 +61,8 @@ class ViewController: UIViewController {
         menuview.collectionViewLayout = collectionViewLayout
         
         menuview.backgroundColor = UIColor.clear
+        menuview.allowsMultipleSelection = false
+        menuview.allowsSelection = true
         
         menuview.dataSource = objDatasourceDelegate
         menuview.delegate = objDatasourceDelegate
@@ -118,7 +120,7 @@ extension ViewController: CollectionMenuProtocol{
     /// selectした時に
     ///
     /// - Parameter indexPath: <#indexPath description#>
-    func afterSelected(_ indexPath: IndexPath, prevIndexPath: IndexPath?) {
+    func afterSelected(_ indexPath: IndexPath, selectedIndexPath prevIndexPath: IndexPath?) {
         
         let intLastSection: Int = objDatasourceDelegate.objMenu.arySection.count-1
         
