@@ -235,6 +235,8 @@ extension ViewController: ScrollActionDelegate{
                     , intSectionCount: objDatasourceDelegate.objMenu.arySection.count
                     , aryRow: objDatasourceDelegate.objMenu.aryRows){
                     
+                    print(prevSelectPath)
+                    
                     // 画面外に選択のセルがでていた場合、まずは選択してたセルまで戻る
                     // そうしないと選択できない。
                     if visibleIndexPaths.index(of: prevSelectPath) == nil{
@@ -346,7 +348,7 @@ extension ViewController: ScrollActionDelegate{
                 // 前のsectionの一番後ろのrowに戻る
                 let prevLastRow: Int = aryRow[currentSelectPath.section-1]
                 
-                toIndexPath = IndexPath(row: prevLastRow, section: currentSelectPath.section-1)
+                toIndexPath = IndexPath(row: prevLastRow-1, section: currentSelectPath.section-1)
             }
             
         }else{
