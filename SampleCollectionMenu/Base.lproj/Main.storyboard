@@ -35,5 +35,13 @@
             </objects>
             <point key="canvasLocation" x="566" y="118"/>
         </scene>
+        <!--Sample View Controller-->
+        <scene sceneID="oBm-Sc-E5f">
+            <objects>
+                <viewController storyboardIdentifier="SampleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yGy-vS-0by" customClass="SampleViewController" customModule="SampleCollectionMenu" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pVW-E2-9Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1612" y="216"/>
+        </scene>
     </scenes>
 </document>

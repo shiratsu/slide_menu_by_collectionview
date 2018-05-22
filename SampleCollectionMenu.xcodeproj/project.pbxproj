@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515320B417EF003BAD68 /* SampleViewController.swift */; };
+		5608515620B417EF003BAD68 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5608515420B417EF003BAD68 /* SampleViewController.xib */; };
 		56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0CE20A90BAE00A19912 /* DateMenu.swift */; };
 		56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* SectionHeader.swift */; };
 		56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* SectionHeader.xib */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5608515320B417EF003BAD68 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		5608515420B417EF003BAD68 /* SampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
 		56CFA0CE20A90BAE00A19912 /* DateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMenu.swift; sourceTree = "<group>"; };
 		56CFA0D020A95A4600A19912 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		56CFA0D220A95AD500A19912 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				56CFA0D220A95AD500A19912 /* SectionHeader.xib */,
 				F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */,
 				56CFA0D420AA63D300A19912 /* MenuCell.swift */,
+				5608515320B417EF003BAD68 /* SampleViewController.swift */,
+				5608515420B417EF003BAD68 /* SampleViewController.xib */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				F392C69420A7B9D20006D463 /* LaunchScreen.storyboard in Resources */,
 				F392C69120A7B9D20006D463 /* Assets.xcassets in Resources */,
 				56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */,
+				5608515620B417EF003BAD68 /* SampleViewController.xib in Resources */,
 				F392C6B820A7BF300006D463 /* ViewController.xib in Resources */,
 				F392C68F20A7B9D10006D463 /* Main.storyboard in Resources */,
 				F392C6BE20A827010006D463 /* DateCell.xib in Resources */,
@@ -297,6 +304,7 @@
 			files = (
 				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
 				56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */,
+				5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
 				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,
 				F392C6C420A82C720006D463 /* WorkDay.swift in Sources */,
