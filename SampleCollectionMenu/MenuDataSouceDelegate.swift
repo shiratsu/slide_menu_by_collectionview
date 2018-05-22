@@ -197,6 +197,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if let constIndexPath = toIndexPath{
             // cellを移動
+            print(constIndexPath)
             collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }
     }
