@@ -117,12 +117,22 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         newFrame.origin.x = screenWidth * CGFloat(page)
         newFrame.origin.y = 0
         view?.frame = newFrame
+        view?.tag = page
+        
+        print(view?.parentViewController())
         
         if view?.superview == nil {
             addSubview(view!)
         }
         
         layoutIfNeeded()
+    }
+    
+    func getParentViews(){
+        
+        for view in self.subviews{
+            print(view.parentViewController())
+        }
     }
     
     // 5
@@ -201,5 +211,15 @@ class InfiniteScrollView: UIScrollView,UIScrollViewDelegate {
         currentScrollPosition = .default
     }
     
+    func getSubView() -> UIView?{
+        
+        let index = Int(contentOffset.x/screenWidth)
+        
+        for view in self.subviews{
+            print(view.parentViewController())
+        }
+        
+        return self.viewWithTag(index)
+    }
 
 }

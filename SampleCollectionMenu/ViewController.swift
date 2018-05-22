@@ -80,24 +80,55 @@ class ViewController: UIViewController {
     /// ページングされる側初期化
     fileprivate func _initPaging(){
         
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let sample1 = storyboard.instantiateViewController(withIdentifier: "SampleViewController") as! SampleViewController
+        let sample2 = storyboard.instantiateViewController(withIdentifier: "SampleViewController") as! SampleViewController
+        let sample3 = storyboard.instantiateViewController(withIdentifier: "SampleViewController") as! SampleViewController
+        
+        
         // 1
-        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view1.backgroundColor = UIColor.red
+        sample1.view.backgroundColor = UIColor.red
+        sample2.view.backgroundColor = UIColor.blue
+        sample3.view.backgroundColor = UIColor.green
         
-        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view2.backgroundColor = UIColor.blue
+        sample1.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height)
+        sample2.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height)
+        sample3.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height)
         
-        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view3.backgroundColor = UIColor.green
+        print(sample1.view.frame)
+        
+        // 1
+//        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
+//        view1.backgroundColor = UIColor.red
+//
+//        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
+//        view2.backgroundColor = UIColor.blue
+//
+//        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
+//        view3.backgroundColor = UIColor.green
+        
+//        print(view1.frame)
         
         // 2
         dataview.numPages = 3
-        dataview.viewObjects = [view1, view2, view3]
+        dataview.viewObjects = [sample1.view, sample2.view, sample3.view]
+//         dataview.viewObjects = [view1, view2, view3]
+        
+        print(sample1.view.parentViewController())
         
         // 3
         dataview.setup()
         
         dataview.actionDelegate = self
+        
+//        let view1 = dataview.getSubView()
+//        let vcl = view1?.parentViewController() as? SampleViewController
+//        print(view1)
+//        print(view1?.parentViewController())
+        
+        dataview.getParentViews()
+        
+        changeSampleCard(IndexPath(row: 0, section: 0))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -222,7 +253,7 @@ extension ViewController: ScrollActionDelegate{
                     if nextSelectPath.row == objDatasourceDelegate.intLastRowCount-1 && nextSelectPath.section == objDatasourceDelegate.intLastSection{
                         dataview.currentScrollPosition = .limit
                     }
-                    
+                    changeSampleCard(nextSelectPath)
                 }
                 
                 break
@@ -251,6 +282,7 @@ extension ViewController: ScrollActionDelegate{
                     if prevSelectPath.row == 0 && prevSelectPath.section == 0{
                         dataview.currentScrollPosition = .zero
                     }
+                    changeSampleCard(prevSelectPath)
                 }
                 
                 break
@@ -265,13 +297,15 @@ extension ViewController: ScrollActionDelegate{
             case .left:
                 menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 1, section: 0))
+                
+                changeSampleCard(IndexPath(row: 1, section: 0))
                 break
             
             /// 後ろに下がる
             case .right:
                 menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
-                
+                changeSampleCard(IndexPath(row: 0, section: 0))
                 // １番前に来ていた場合、scrollできないように調整
                 dataview.currentScrollPosition = .zero
                 
@@ -361,5 +395,39 @@ extension ViewController: ScrollActionDelegate{
         }
         
         return toIndexPath
+    }
+    
+    func changeSampleCard(_ indexPath: IndexPath){
+        
+        dataview.getParentViews()
+        
+        let view1 = dataview.getSubView()
+        let vcl = view1?.parentViewController() as? SampleViewController
+//        print(view1)
+//        print(view1?.parentViewController())
+//        print(vcl)
+        if let view = dataview.getSubView(),let vcl = view.parentViewController() as? SampleViewController{
+            
+            let startDate = objDatasourceDelegate.objMenu.aryStartDate[indexPath.section]
+            
+            let targetDate: Date = startDate.getDateFromDiff(Double(indexPath.row))
+            
+            let date: String = DateFormatters.monthDateFormatter.string(from: targetDate)
+            
+            vcl.dateLabel.text = date
+        }
+    }
+}
+
+extension UIView {
+    func parentViewController() -> UIViewController? {
+        var parentResponder: UIResponder? = self
+        while true {
+            guard let nextResponder = parentResponder?.next else { return nil }
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            parentResponder = nextResponder
+        }
     }
 }

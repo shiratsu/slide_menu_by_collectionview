@@ -10,6 +10,17 @@ import UIKit
 
 class SampleViewController: UIViewController {
 
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    /**
+     xibを読み込む
+     */
+    override func loadView() {
+        if let view = UINib(nibName: "SampleViewController", bundle: nil).instantiate(withOwner: self, options: nil).first as? UIView {
+            self.view = view
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
