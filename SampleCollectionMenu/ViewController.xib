@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="SampleCollectionMenu" customModuleProvider="target">
             <connections>
-                <outlet property="dataview" destination="nCQ-Kn-S4A" id="wTm-hV-cfW"/>
+                <outlet property="dataview" destination="X4e-oV-x07" id="Hq2-eo-P1U"/>
                 <outlet property="menuview" destination="9fv-bb-CFo" id="IMn-CL-nLQ"/>
             </connections>
         </placeholder>
@@ -34,19 +34,20 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCQ-Kn-S4A" customClass="InfiniteScrollView" customModule="SampleCollectionMenu" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="75" width="375" height="592"/>
-                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4e-oV-x07">
+                    <rect key="frame" x="0.0" y="74" width="375" height="593"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9fv-bb-CFo" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="028-iE-XqO"/>
-                <constraint firstItem="nCQ-Kn-S4A" firstAttribute="top" secondItem="9fv-bb-CFo" secondAttribute="bottom" id="O4N-AE-VC4"/>
+                <constraint firstItem="X4e-oV-x07" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2TT-HG-D3d"/>
+                <constraint firstItem="X4e-oV-x07" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="54" id="S4V-fn-pGU"/>
                 <constraint firstItem="9fv-bb-CFo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="cEy-pO-hDI"/>
                 <constraint firstItem="9fv-bb-CFo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="cmd-vu-ZAq"/>
-                <constraint firstItem="nCQ-Kn-S4A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="e7V-O9-vcj"/>
-                <constraint firstItem="nCQ-Kn-S4A" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="m9w-CB-0zH"/>
-                <constraint firstItem="nCQ-Kn-S4A" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="yMb-KG-jjp"/>
+                <constraint firstItem="X4e-oV-x07" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="iOi-OE-gi1"/>
+                <constraint firstItem="X4e-oV-x07" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="vce-Y7-Bxe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

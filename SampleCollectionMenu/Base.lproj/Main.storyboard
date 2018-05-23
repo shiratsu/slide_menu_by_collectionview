@@ -35,13 +35,21 @@
             </objects>
             <point key="canvasLocation" x="566" y="118"/>
         </scene>
+        <!--Slide PagingVCL-->
+        <scene sceneID="ZsG-Rn-YKU">
+            <objects>
+                <pageViewController storyboardIdentifier="SlidePagingVCL" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="dF7-LE-ZS4" customClass="SlidePagingVCL" customModule="SampleCollectionMenu" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d6G-nE-svw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1393" y="212"/>
+        </scene>
         <!--Sample View Controller-->
         <scene sceneID="oBm-Sc-E5f">
             <objects>
                 <viewController storyboardIdentifier="SampleViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yGy-vS-0by" customClass="SampleViewController" customModule="SampleCollectionMenu" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVW-E2-9Ht" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="216"/>
+            <point key="canvasLocation" x="2140" y="212"/>
         </scene>
     </scenes>
 </document>

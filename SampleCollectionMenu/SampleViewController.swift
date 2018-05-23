@@ -11,7 +11,7 @@ import UIKit
 class SampleViewController: UIViewController {
 
     @IBOutlet weak var dateLabel: UILabel!
-    
+    var pageIndex: Int = 0
     /**
      xibを読み込む
      */

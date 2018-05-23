@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515320B417EF003BAD68 /* SampleViewController.swift */; };
 		5608515620B417EF003BAD68 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5608515420B417EF003BAD68 /* SampleViewController.xib */; };
+		5608515820B4ED53003BAD68 /* SlidePagingVCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */; };
 		56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0CE20A90BAE00A19912 /* DateMenu.swift */; };
 		56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* SectionHeader.swift */; };
 		56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* SectionHeader.xib */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		5608515320B417EF003BAD68 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		5608515420B417EF003BAD68 /* SampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
+		5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidePagingVCL.swift; sourceTree = "<group>"; };
 		56CFA0CE20A90BAE00A19912 /* DateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMenu.swift; sourceTree = "<group>"; };
 		56CFA0D020A95A4600A19912 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		56CFA0D220A95AD500A19912 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				56CFA0D420AA63D300A19912 /* MenuCell.swift */,
 				5608515320B417EF003BAD68 /* SampleViewController.swift */,
 				5608515420B417EF003BAD68 /* SampleViewController.xib */,
+				5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				F392C6C420A82C720006D463 /* WorkDay.swift in Sources */,
 				56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */,
 				F392C6BA20A7C1E20006D463 /* DateCell.swift in Sources */,
+				5608515820B4ED53003BAD68 /* SlidePagingVCL.swift in Sources */,
 				F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */,
 				F392C6BC20A7E6580006D463 /* MenuDataSouceDelegate.swift in Sources */,
 				F392C6CA20A9E66B0006D463 /* InfiniteScrollView.swift in Sources */,
