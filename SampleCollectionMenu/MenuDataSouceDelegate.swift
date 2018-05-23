@@ -74,7 +74,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         let startDate: Date = objMenu.aryStartDate[indexPath.section]
         let targetDate: Date = startDate.getDateFromDiff(Double(indexPath.row))
         
-        let date: String = DateFormatters.monthDateFormatter.string(from: targetDate)
+        let date: String = DateFormatters.dateFormatter.string(from: targetDate)
         let weekname: String = targetDate.weekName
         cell.dateLabel.text = date
         cell.weekLabel.text = weekname

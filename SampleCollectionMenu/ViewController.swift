@@ -12,7 +12,13 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var menuview: UICollectionView!
-    @IBOutlet weak var dataview: InfiniteScrollView!
+    @IBOutlet weak var dataview: UIView!
+    
+    fileprivate lazy var pagevcl: SlidePagingVCL = {
+        let nextvcl = storyboard?.instantiateViewController(withIdentifier: "SlidePagingVCL") as! SlidePagingVCL
+        nextvcl.actionDelegate = self
+        return nextvcl
+    }()
     
     fileprivate lazy var screenWidth : CGFloat = UIScreen.main.bounds.width
     
@@ -80,24 +86,11 @@ class ViewController: UIViewController {
     /// ページングされる側初期化
     fileprivate func _initPaging(){
         
-        // 1
-        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view1.backgroundColor = UIColor.red
+        self.addChildViewController(pagevcl)
+        self.dataview.addSubview(pagevcl.view)
+        pagevcl.didMove(toParentViewController: self)
         
-        let view2 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view2.backgroundColor = UIColor.blue
         
-        let view3 = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: dataview.frame.size.height))
-        view3.backgroundColor = UIColor.green
-        
-        // 2
-        dataview.numPages = 3
-        dataview.viewObjects = [view1, view2, view3]
-        
-        // 3
-        dataview.setup()
-        
-        dataview.actionDelegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,56 +126,48 @@ extension ViewController: CollectionMenuProtocol{
         let intLastIndexRow: Int = objDatasourceDelegate.objMenu.aryRows[intLastSection]
         
         guard let constIndexPath: IndexPath = prevIndexPath else{
-            _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+            pagevcl.changePageByProgram(.forward)
             return
         }
         
         // 前のが小さい
         if indexPath.section > constIndexPath.section{
-            _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+            pagevcl.changePageByProgram(.forward)
             
         // 前のが大きい
         }else if indexPath.section < constIndexPath.section{
-            _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
+            pagevcl.changePageByProgram(.reverse)
         // 同じ
         }else{
             // １番前
             if indexPath.row == 0 && indexPath.section == 0{
                 if indexPath.row <= constIndexPath.row{
-                    dataview.currentScrollPosition = .zero
-                    _callScrollMethod(x: 0)
+                    pagevcl.changePageByProgram(.reverse)
+                    pagevcl.scrollPosition = .zero
+                    
                 }
             // 一番後ろ
             }else if indexPath.row == intLastIndexRow && indexPath.section == intLastSection{
                 if indexPath.row >= constIndexPath.row{
-                    dataview.currentScrollPosition = .limit
-                    _callScrollMethod(x: view.frame.width*4)
+                    pagevcl.changePageByProgram(.forward)
+                    pagevcl.scrollPosition = .limit
                 }
                 
             }else{
                 // 前のが大きい
                 if indexPath.row < constIndexPath.row{
-                    dataview.setContentOffset(CGPoint(x: dataview.contentOffset.x-view.frame.width, y: 0), animated: true)
-                    _callScrollMethod(x: dataview.contentOffset.x-view.frame.width)
-                    
+                    pagevcl.changePageByProgram(.reverse)
                 // 前のが小さい
                 }else if indexPath.row > constIndexPath.row{
-                    _callScrollMethod(x: dataview.contentOffset.x+view.frame.width)
+                    pagevcl.changePageByProgram(.forward)
+                    
                 }
             }
         }
     }
     
     
-    /// scrollのメソッドをコール
-    /// collectionviewの選択後にcallされる。横スライド分だけなので、yは0
-    ///
-    /// - Parameter x: <#x description#>
-    fileprivate func _callScrollMethod(x: CGFloat){
-        dataview.isCanCallAfter = false
-        dataview.setContentOffset(CGPoint(x: x, y: 0), animated: true)
-        dataview.scrollViewDidEndDecelerating(dataview)
-    }
+    
 }
 
 extension ViewController: ScrollActionDelegate{
@@ -200,7 +185,7 @@ extension ViewController: ScrollActionDelegate{
             let visibleIndexPaths: [IndexPath] = menuview.indexPathsForVisibleItems
             
             switch direction{
-            
+                
             /// 前に進む
             case .left:
                 
@@ -220,7 +205,9 @@ extension ViewController: ScrollActionDelegate{
                     
                     // 一番後ろに来てしまった場合、scrollできないように、調整
                     if nextSelectPath.row == objDatasourceDelegate.intLastRowCount-1 && nextSelectPath.section == objDatasourceDelegate.intLastSection{
-                        dataview.currentScrollPosition = .limit
+                        pagevcl.scrollPosition = .limit
+                    }else{
+                        pagevcl.scrollPosition = .default
                     }
                     
                 }
@@ -249,7 +236,9 @@ extension ViewController: ScrollActionDelegate{
                     
                     // １番前に来ていた場合、scrollできないように調整
                     if prevSelectPath.row == 0 && prevSelectPath.section == 0{
-                        dataview.currentScrollPosition = .zero
+                        pagevcl.scrollPosition = .zero
+                    }else{
+                        pagevcl.scrollPosition = .default
                     }
                 }
                 
@@ -265,15 +254,16 @@ extension ViewController: ScrollActionDelegate{
             case .left:
                 menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 1, section: 0))
+                pagevcl.scrollPosition = .default
                 break
-            
+                
             /// 後ろに下がる
             case .right:
                 menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
                 
                 // １番前に来ていた場合、scrollできないように調整
-                dataview.currentScrollPosition = .zero
+                pagevcl.scrollPosition = .zero
                 
                 break
             case .default:
@@ -282,6 +272,7 @@ extension ViewController: ScrollActionDelegate{
         }
         
     }
+    
     
     
     /// 次のselectすべきものを取得
@@ -362,4 +353,8 @@ extension ViewController: ScrollActionDelegate{
         
         return toIndexPath
     }
+    
+    
 }
+
+
