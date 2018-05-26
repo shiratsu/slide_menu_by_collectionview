@@ -33,8 +33,25 @@ protocol ScrollActionDelegate: class{
     func afterScroll(_ direction: ScrollDirection)
 }
 
+protocol SlidePagingVCLProtocol: class{
+    func getVCL() -> UIViewController
+    func changePageByProgram(_ direction: UIPageViewControllerNavigationDirection)
+    
+    func slidePagingVCL(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
+    
+    func beforeScroll(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
+    
+    func afterScroll(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
+    
+    func goBackPage(viewController: UIViewController) -> UIViewController?
+    
+    func goFowardPage(viewController: UIViewController) -> UIViewController?
+    
+    func viewControllerAtIndex(index:Int) -> SampleViewController?
+}
 
-class SlidePagingVCL: UIPageViewController {
+
+class SlidePagingVCL: UIPageViewController,SlidePagingVCLProtocol {
 
     
     weak var actionDelegate: ScrollActionDelegate?
@@ -43,13 +60,13 @@ class SlidePagingVCL: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setViewControllers([goFowardPage(viewController: getSample())!], direction: .forward, animated: true, completion: nil)
+        self.setViewControllers([getVCL()], direction: .forward, animated: true, completion: nil)
         self.dataSource = self
         self.delegate = self
         // Do any additional setup after loading the view.
     }
     
-    func getSample() -> SampleViewController{
+    func getVCL() -> UIViewController{
         return storyboard!.instantiateViewController(withIdentifier: "SampleViewController") as! SampleViewController
     }
 
@@ -84,22 +101,16 @@ class SlidePagingVCL: UIPageViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
-
-extension SlidePagingVCL : UIPageViewControllerDataSource {
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
+    func beforeScroll(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
         if self.scrollPosition == .zero{
             return nil
         }
         
         return goBackPage(viewController: viewController)
     }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
+
+    func afterScroll(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
         if self.scrollPosition == .limit{
             return nil
         }
@@ -107,7 +118,7 @@ extension SlidePagingVCL : UIPageViewControllerDataSource {
         return goFowardPage(viewController: viewController)
     }
     
-    fileprivate func goBackPage(viewController: UIViewController) -> UIViewController? {
+    func goBackPage(viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! SampleViewController).pageIndex
         if index == 0 || index == NSNotFound {
@@ -117,7 +128,7 @@ extension SlidePagingVCL : UIPageViewControllerDataSource {
         return viewControllerAtIndex(index: index)
     }
     
-    fileprivate func goFowardPage(viewController: UIViewController) -> UIViewController? {
+    func goFowardPage(viewController: UIViewController) -> UIViewController? {
         
         var index = (viewController as! SampleViewController).pageIndex
         
@@ -129,7 +140,7 @@ extension SlidePagingVCL : UIPageViewControllerDataSource {
         return self.viewControllerAtIndex(index: index)
     }
     
-    fileprivate func viewControllerAtIndex(index:Int) -> SampleViewController? {
+    func viewControllerAtIndex(index:Int) -> SampleViewController? {
         
         
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SampleViewController") as? SampleViewController{
@@ -138,10 +149,8 @@ extension SlidePagingVCL : UIPageViewControllerDataSource {
         }
         return nil
     }
-}
-
-extension SlidePagingVCL: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
+    
+    func slidePagingVCL(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
         
         if let currentvcl = pageViewController.viewControllers?.first as? SampleViewController,let prevvcl = previousViewControllers.first as? SampleViewController {
             
@@ -154,6 +163,30 @@ extension SlidePagingVCL: UIPageViewControllerDelegate {
             currentvcl.dateLabel.text = String(currentvcl.pageIndex)
             
         }
+        
+    }
+
+}
+
+extension SlidePagingVCL : UIPageViewControllerDataSource {
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        
+        return beforeScroll(pageViewController,viewControllerBefore: viewController)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
+        return afterScroll(pageViewController,viewControllerBefore: viewController)
+    }
+    
+    
+}
+
+extension SlidePagingVCL: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
+        
+        slidePagingVCL(pageViewController, didFinishAnimating: finished, previousViewControllers: previousViewControllers, transitionCompleted: completed)
         
     }
 }
