@@ -48,6 +48,16 @@
                ReferencedContainer = "container:SampleCollectionMenu.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F3A8C12020BC4E12003FFE5E"
+               BuildableName = "SlidePagingMenuTests.xctest"
+               BlueprintName = "SlidePagingMenuTests"
+               ReferencedContainer = "container:SampleCollectionMenu.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

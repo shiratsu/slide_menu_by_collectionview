@@ -18,6 +18,10 @@ protocol CollectionMenuProtocol: class{
     func afterSelected(_ indexPath: IndexPath, selectedIndexPath: IndexPath?)
 }
 
+protocol MenuDataSourceProtocol: class{
+    
+}
+
 class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
     
     
