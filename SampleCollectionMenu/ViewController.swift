@@ -198,9 +198,8 @@ extension ViewController: ScrollActionDelegate{
                     if visibleIndexPaths.index(of: nextSelectPath) == nil{
                         menuview.scrollToItem(at: nextSelectPath, at: .centeredHorizontally, animated: true)
                     }
-                    
-                    menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.isScroll = false
+                    menuview.selectItem(at: nextSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: nextSelectPath)
                     
                     // 一番後ろに来てしまった場合、scrollできないように、調整
@@ -229,9 +228,9 @@ extension ViewController: ScrollActionDelegate{
                     if visibleIndexPaths.index(of: prevSelectPath) == nil{
                         menuview.scrollToItem(at: prevSelectPath, at: .centeredHorizontally, animated: true)
                     }
-                    
-                    menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
                     objDatasourceDelegate.isScroll = false
+                    menuview.selectItem(at: prevSelectPath, animated: false, scrollPosition: .init(rawValue: 0))
+                    
                     objDatasourceDelegate.collectionView(menuview, didSelectItemAt: prevSelectPath)
                     
                     // １番前に来ていた場合、scrollできないように調整
@@ -252,6 +251,7 @@ extension ViewController: ScrollActionDelegate{
                 
             /// 前に進む
             case .left:
+                objDatasourceDelegate.isScroll = false
                 menuview.selectItem(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 1, section: 0))
                 pagevcl.scrollPosition = .default
@@ -259,6 +259,7 @@ extension ViewController: ScrollActionDelegate{
                 
             /// 後ろに下がる
             case .right:
+                objDatasourceDelegate.isScroll = false
                 menuview.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init(rawValue: 0))
                 objDatasourceDelegate.collectionView(menuview, didSelectItemAt: IndexPath(row: 0, section: 0))
                 
