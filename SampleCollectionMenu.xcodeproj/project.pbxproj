@@ -10,6 +10,11 @@
 		5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515320B417EF003BAD68 /* SampleViewController.swift */; };
 		5608515620B417EF003BAD68 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5608515420B417EF003BAD68 /* SampleViewController.xib */; };
 		5608515820B4ED53003BAD68 /* SlidePagingVCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */; };
+		5635340820D7F3C80015CEE2 /* SlideMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340720D7F3C80015CEE2 /* SlideMenuAction.swift */; };
+		5635340A20D7F4720015CEE2 /* SlidePagingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340920D7F4720015CEE2 /* SlidePagingProtocol.swift */; };
+		5635340C20D7FE870015CEE2 /* ChildVCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340B20D7FE870015CEE2 /* ChildVCL.swift */; };
+		5635340E20D7FF4A0015CEE2 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340D20D7FF4A0015CEE2 /* StringExtension.swift */; };
+		56382BCA20D7E21C005A006B /* HeaderMenuProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56382BC920D7E21C005A006B /* HeaderMenuProtocol.swift */; };
 		56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0CE20A90BAE00A19912 /* DateMenu.swift */; };
 		56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFA0D020A95A4600A19912 /* SectionHeader.swift */; };
 		56CFA0D320A95AD500A19912 /* SectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56CFA0D220A95AD500A19912 /* SectionHeader.xib */; };
@@ -93,6 +98,11 @@
 		5608515320B417EF003BAD68 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		5608515420B417EF003BAD68 /* SampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
 		5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidePagingVCL.swift; sourceTree = "<group>"; };
+		5635340720D7F3C80015CEE2 /* SlideMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuAction.swift; sourceTree = "<group>"; };
+		5635340920D7F4720015CEE2 /* SlidePagingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePagingProtocol.swift; sourceTree = "<group>"; };
+		5635340B20D7FE870015CEE2 /* ChildVCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCL.swift; sourceTree = "<group>"; };
+		5635340D20D7FF4A0015CEE2 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		56382BC920D7E21C005A006B /* HeaderMenuProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderMenuProtocol.swift; sourceTree = "<group>"; };
 		56CFA0CE20A90BAE00A19912 /* DateMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMenu.swift; sourceTree = "<group>"; };
 		56CFA0D020A95A4600A19912 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		56CFA0D220A95AD500A19912 /* SectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionHeader.xib; sourceTree = "<group>"; };
@@ -204,6 +214,7 @@
 				F392C69520A7B9D20006D463 /* Info.plist */,
 				F392C6B720A7BF300006D463 /* ViewController.xib */,
 				F392C6B920A7C1E20006D463 /* DateCell.swift */,
+				56382BC920D7E21C005A006B /* HeaderMenuProtocol.swift */,
 				F392C6BB20A7E6580006D463 /* MenuDataSouceDelegate.swift */,
 				F392C6BD20A827010006D463 /* DateCell.xib */,
 				F392C6BF20A82B450006D463 /* DateExtension.swift */,
@@ -212,11 +223,15 @@
 				56CFA0CE20A90BAE00A19912 /* DateMenu.swift */,
 				56CFA0D020A95A4600A19912 /* SectionHeader.swift */,
 				56CFA0D220A95AD500A19912 /* SectionHeader.xib */,
+				5635340D20D7FF4A0015CEE2 /* StringExtension.swift */,
 				F392C6C920A9E66B0006D463 /* InfiniteScrollView.swift */,
 				56CFA0D420AA63D300A19912 /* MenuCell.swift */,
 				5608515320B417EF003BAD68 /* SampleViewController.swift */,
 				5608515420B417EF003BAD68 /* SampleViewController.xib */,
 				5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */,
+				5635340920D7F4720015CEE2 /* SlidePagingProtocol.swift */,
+				5635340720D7F3C80015CEE2 /* SlideMenuAction.swift */,
+				5635340B20D7FE870015CEE2 /* ChildVCL.swift */,
 			);
 			path = SampleCollectionMenu;
 			sourceTree = "<group>";
@@ -473,16 +488,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F392C6C220A82BA10006D463 /* DateFormatters.swift in Sources */,
+				56382BCA20D7E21C005A006B /* HeaderMenuProtocol.swift in Sources */,
 				56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */,
+				5635340820D7F3C80015CEE2 /* SlideMenuAction.swift in Sources */,
 				5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
 				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,
+				5635340C20D7FE870015CEE2 /* ChildVCL.swift in Sources */,
 				F392C6C420A82C720006D463 /* WorkDay.swift in Sources */,
 				56CFA0CF20A90BAE00A19912 /* DateMenu.swift in Sources */,
 				F392C6BA20A7C1E20006D463 /* DateCell.swift in Sources */,
 				5608515820B4ED53003BAD68 /* SlidePagingVCL.swift in Sources */,
 				F392C68A20A7B9D00006D463 /* AppDelegate.swift in Sources */,
 				F392C6BC20A7E6580006D463 /* MenuDataSouceDelegate.swift in Sources */,
+				5635340E20D7FF4A0015CEE2 /* StringExtension.swift in Sources */,
+				5635340A20D7F4720015CEE2 /* SlidePagingProtocol.swift in Sources */,
 				F392C6CA20A9E66B0006D463 /* InfiniteScrollView.swift in Sources */,
 				56CFA0D120A95A4600A19912 /* SectionHeader.swift in Sources */,
 			);

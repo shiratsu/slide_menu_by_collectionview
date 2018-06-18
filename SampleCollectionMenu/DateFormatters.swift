@@ -1,9 +1,9 @@
 //
 //  DateFormatters.swift
-//  SampleCollectionMenu
+//  shotworks_customer
 //
-//  Created by 平塚俊輔 on 2018/05/13.
-//  Copyright © 2018年 平塚俊輔. All rights reserved.
+//  Created by 平塚 俊輔 on 2018/05/12.
+//  Copyright © 2018年 Âπ≥Â°ö ‰øäËºî. All rights reserved.
 //
 
 import Foundation
@@ -29,15 +29,38 @@ struct DateFormatters {
         return dateFormatter
     }()
     
+    
+    static var yymmddhhmmssFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd090000"
+        return dateFormatter
+    }()
+    
+    static var yymmddnohyphenFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter
+    }()
+    
     static var monthDateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd"
         return dateFormatter
     }()
-
+    
     static var monthFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM"
+        return dateFormatter
+    }()
+    static var anothermonthFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d"
+        return dateFormatter
+    }()
+    static var yearFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
         return dateFormatter
     }()
     

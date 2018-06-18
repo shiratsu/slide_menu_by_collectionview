@@ -11,18 +11,22 @@ import UIKit
 protocol CollectionMenuProtocol: class{
     
     
+    /// 選択を外した場合
+    ///
+    /// - Parameter deselectPath: <#deselectPath description#>
+    func afterDeselect(deselectPath: IndexPath)
+    
     /// 選択終わったら
     ///
     /// - Parameter indexPath: <#indexPath description#>
     /// - Parameter selectedIndexPath: <#indexPath description#>
     func afterSelected(_ indexPath: IndexPath, selectedIndexPath: IndexPath?)
-}
-
-protocol MenuDataSourceProtocol: class{
     
+    
+    func selectedAction(_ cell: DateCell)
 }
 
-class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionViewDelegate {
+class MenuDataSouceDelegate: NSObject,HeaderMenuProtocol {
     
     
     var objMenu: DateMenu = DateMenu()
@@ -37,9 +41,9 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
     
     weak var actionDelegate: CollectionMenuProtocol?
     
+    var objDay: WorkDay = WorkDay()
+    
     func initMenu(){
-        
-        var objDay: WorkDay = WorkDay()
         
         // 現在日時と最終日を初期化する
         objDay.initCurrentDate()
@@ -79,19 +83,25 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         let targetDate: Date = startDate.getDateFromDiff(Double(indexPath.row))
         
         let date: String = DateFormatters.dateFormatter.string(from: targetDate)
+        let yymmdd: String = DateFormatters.yymmddFormatter.string(from: targetDate)
+        let name: String = DateFormatters.monthDateFormatter.string(from:targetDate)
+        let longdatestring: String = DateFormatters.yymmddhhmmssFormatter.string(from:targetDate)
+        let codenohyphen = DateFormatters.yymmddnohyphenFormatter.string(from:targetDate)
         let weekname: String = targetDate.weekName
-        cell.dateLabel.text = date
-        cell.weekLabel.text = weekname
+        
+//        cell.setData(strDate: date, strWeek: weekname, strVal: yymmdd, strNameVal: name,strLongVal: longdatestring, strCodeNoHyphenVal: codenohyphen)
         
         if let constSelectedItemPath = selectedIndexPath,indexPath == constSelectedItemPath{
-
+            
             cell.isSelect = true
-
+            cell.isSelected = true
+            
         }else{
             cell.isSelect = false
+            cell.isSelected = false
             
         }
-                
+        
         return cell
     }
     
@@ -120,30 +130,29 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         guard let cell: DateCell = collectionView.cellForItem(at: indexPath) as? DateCell else{
             return
         }
-
+        
         
         if let constSelectedItemPath = selectedIndexPath,let pcell: DateCell = collectionView.cellForItem(at: constSelectedItemPath) as? DateCell{
-            
             if indexPath == constSelectedItemPath{
                 selectedIndexPath = nil
                 cell.isSelect = false
+                actionDelegate?.afterDeselect(deselectPath: constSelectedItemPath)
             }else{
                 // 選択したcellまでスクロール
-                _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
-                selectedIndexPath = indexPath
                 pcell.isSelect = false
                 cell.isSelect = true
+                _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
+                selectedIndexPath = indexPath
                 _scrollToSpecificPath(indexPath, collectionView: collectionView)
             }
             
         }else{
             // 選択したcellまでスクロール
+            cell.isSelect = true
             _scrollSlideView(isScroll, currentIndexPath: indexPath, selectedPath: selectedIndexPath)
             selectedIndexPath = indexPath
-            cell.isSelect = true
             _scrollToSpecificPath(indexPath, collectionView: collectionView)
         }
-        
     }
     
     
@@ -162,7 +171,7 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
             isScroll = true
         }
     }
-  
+    
     /// 指定ポジションまで移動
     ///
     /// - Parameters:
@@ -201,7 +210,6 @@ class MenuDataSouceDelegate: NSObject,UICollectionViewDataSource,UICollectionVie
         
         if let constIndexPath = toIndexPath{
             // cellを移動
-            print(constIndexPath)
             collectionView.scrollToItem(at: constIndexPath, at: .centeredHorizontally, animated: true)
         }
     }

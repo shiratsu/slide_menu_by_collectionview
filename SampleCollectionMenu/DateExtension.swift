@@ -37,6 +37,16 @@ extension Date {
 extension Date {
     
     
+    
+    /// 基準日を取得
+    ///
+    /// - Returns: <#return value description#>
+    func getBaseDate() -> Date?{
+        let strTmpStartDate: String = DateFormatters.yymmddhhmmssFormatter.string(from:self)
+        return strTmpStartDate.dateFromString("yyyyMMddHHmmss")
+    }
+    
+    
     /// 日付の差分
     ///
     /// - Parameter targetDate: <#targetDate description#>
