@@ -26,6 +26,14 @@ class DateCell: UICollectionViewCell {
         isSelect = false
     }
     
+    
+    
+    /// パラメータをセットする
+    ///
+    /// - Parameter dicParam: <#dicParam description#>
+    func setData(dicParam: [String:Any]){
+        
+    }
 }
 
 extension DateCell: MenuCellProtocol{

@@ -39,19 +39,16 @@ class SlideMenuAction: NSObject {
             let intRealDateDiff: Int = fixStartDate.daysDiff(constTargetDate)
             
             // sectionの日付を取得
-            let sectionStartDate: Date = aryStartDate[intMonthDiff]
-            
-            guard let fixSectionStartDate: Date = sectionStartDate.getBaseDate() else{
-                return 0
+            guard let sectionStartDate: Date = aryStartDate[safe: intMonthDiff]
+                ,let fixSectionStartDate: Date = sectionStartDate.getBaseDate() else{
+                    return 0
             }
             
             // 日付の差分を取得
             var intDateDiff: Int = fixSectionStartDate.daysDiff(constTargetDate)
             
-            let rowCount = aryRows[intMonthDiff]
-            
             // 次のsection
-            if rowCount < intDateDiff{
+            if let rowCount = aryRows[safe: intMonthDiff],rowCount < intDateDiff{
                 intMonthDiff += 1
                 intDateDiff = 0
             }
@@ -107,7 +104,8 @@ class SlideMenuAction: NSObject {
                 
                 if let nextSelectPath: IndexPath = _getNextPath(currentSelectPath
                     , intSectionCount: arySection.count
-                    , aryRow: aryRows){
+                    , aryRow: aryRows)
+                    , collectionView.validate(indexPath: nextSelectPath){
                     
                     // 画面外に選択のセルがでていた場合、まずは選択してたセルまで戻る
                     // そうしないと選択できない。
@@ -135,7 +133,8 @@ class SlideMenuAction: NSObject {
                 
                 if let prevSelectPath: IndexPath = _getPrevPath(currentSelectPath
                     , intSectionCount: arySection.count
-                    , aryRow: aryRows){
+                    , aryRow: aryRows)
+                    , collectionView.validate(indexPath: prevSelectPath){
                     
                     
                     // 画面外に選択のセルがでていた場合、まずは選択してたセルまで戻る

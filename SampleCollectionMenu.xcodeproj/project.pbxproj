@@ -10,6 +10,7 @@
 		5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515320B417EF003BAD68 /* SampleViewController.swift */; };
 		5608515620B417EF003BAD68 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5608515420B417EF003BAD68 /* SampleViewController.xib */; };
 		5608515820B4ED53003BAD68 /* SlidePagingVCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */; };
+		562F874120DA8EB000AA50CA /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562F874020DA8EAF00AA50CA /* CollectionExtension.swift */; };
 		5635340820D7F3C80015CEE2 /* SlideMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340720D7F3C80015CEE2 /* SlideMenuAction.swift */; };
 		5635340A20D7F4720015CEE2 /* SlidePagingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340920D7F4720015CEE2 /* SlidePagingProtocol.swift */; };
 		5635340C20D7FE870015CEE2 /* ChildVCL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5635340B20D7FE870015CEE2 /* ChildVCL.swift */; };
@@ -98,6 +99,7 @@
 		5608515320B417EF003BAD68 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		5608515420B417EF003BAD68 /* SampleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SampleViewController.xib; sourceTree = "<group>"; };
 		5608515720B4ED53003BAD68 /* SlidePagingVCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlidePagingVCL.swift; sourceTree = "<group>"; };
+		562F874020DA8EAF00AA50CA /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		5635340720D7F3C80015CEE2 /* SlideMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuAction.swift; sourceTree = "<group>"; };
 		5635340920D7F4720015CEE2 /* SlidePagingProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidePagingProtocol.swift; sourceTree = "<group>"; };
 		5635340B20D7FE870015CEE2 /* ChildVCL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCL.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		F392C68820A7B9D00006D463 /* SampleCollectionMenu */ = {
 			isa = PBXGroup;
 			children = (
+				562F874020DA8EAF00AA50CA /* CollectionExtension.swift */,
 				F392C68920A7B9D00006D463 /* AppDelegate.swift */,
 				F392C68B20A7B9D00006D463 /* ViewController.swift */,
 				F392C68D20A7B9D10006D463 /* Main.storyboard */,
@@ -491,6 +494,7 @@
 				56382BCA20D7E21C005A006B /* HeaderMenuProtocol.swift in Sources */,
 				56CFA0D520AA63D300A19912 /* MenuCell.swift in Sources */,
 				5635340820D7F3C80015CEE2 /* SlideMenuAction.swift in Sources */,
+				562F874120DA8EB000AA50CA /* CollectionExtension.swift in Sources */,
 				5608515520B417EF003BAD68 /* SampleViewController.swift in Sources */,
 				F392C68C20A7B9D00006D463 /* ViewController.swift in Sources */,
 				F392C6C020A82B450006D463 /* DateExtension.swift in Sources */,

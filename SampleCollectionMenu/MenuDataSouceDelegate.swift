@@ -23,7 +23,7 @@ protocol CollectionMenuProtocol: class{
     func afterSelected(_ indexPath: IndexPath, selectedIndexPath: IndexPath?)
     
     
-    func selectedAction(_ cell: DateCell)
+    func selectedAction(_ cell: UICollectionViewCell)
 }
 
 class MenuDataSouceDelegate: NSObject,HeaderMenuProtocol {

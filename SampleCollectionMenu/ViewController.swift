@@ -114,6 +114,24 @@ class ViewController: UIViewController {
 extension ViewController: CollectionMenuProtocol{
     
     
+    
+    /// 選択を外したら
+    ///
+    /// - Parameter deselectPath: <#deselectPath description#>
+    func afterDeselect(deselectPath: IndexPath) {
+        
+    }
+    
+    
+    /// 選択をしたら
+    ///
+    /// - Parameter cell: <#cell description#>
+    func selectedAction(_ cell: UICollectionViewCell) {
+        
+    }
+    
+    
+    
     /// ヘッダのメニューで選択した時に
     /// 最後に、実際のscroll処理が呼ばれる
     ///
